@@ -1,86 +1,227 @@
 
-    <header class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg navbar-theme">
+<nav class="navbar navbar-inverse  navbar-theme">
     <div class="container">
-      
-      <a class="navbar-brand" style="padding-top: 1.5rem;" [routerLink]="['/']" (click)="navbarCollapsed = true">
-        <img src="./assets/img/logo.png" alt="Image Alternative text" title="Image Title" />
-       </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbarCollapsed = !navbarCollapsed"
-              [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" 
+		(click)="isCollapsed = !isCollapsed" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+		<a class="navbar-brand" routerLink="" style="padding-left: 12px;">
+            <img src="./assets/img/logo.png" alt="Image Alternative text" title="Image Title" />
+        </a>
+      </div>
   
-      <div class="collapse navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
-       
-  
-        <ul class="navbar-nav mr-auto">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" [collapse]=isCollapsed>
+               <ul class="nav navbar-nav">
             <div *ngIf="token; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
-          <li class="active">
-              <a class="nav-link" routerLink='/Home' (click)="navbarCollapsed = true">Home</a>
-          </li>
+                <li class="active">
+                    <a routerLink="/Home" style="margin: 0 15px;" (click)="isCollapsed = false">HOME</a>
+                </li>
+                <li>
+                    <a routerLink='/about' style="margin: 0 15px;" (click)="isCollapsed = true">ABOUT US</a>
+                </li>
+                <li>
+                    <a routerLink='/faq' style="margin: 0 15px;" (click)="isCollapsed = true">FAQ</a>
+                </li>
+                
+                <li>
+                    <a routerLink='/howitworks' style="margin: 0 15px;" (click)="isCollapsed = true">HOW IT WORKS</a>
+                </li>
+                <li>
+                    <a href='https://blog.carrycog.com/'  style="margin: 0 15px;" (click)="isCollapsed = true">BLOG</a>
+                </li>
+                <li>
+                    <a routerLink='/contact' style="margin: 0 15px;" (click)="isCollapsed = true">CONTACT US</a>
+                </li>
         </ng-template>
         <ng-template #elseBlock>
             <li class="active">
-                <a class="nav-link" routerLink="/Home"  (click)="navbarCollapsed = true">Home</a>
+                <a routerLink="/Home" style="margin: 0 15px;" (click)="isCollapsed = false">HOME</a>
+            </li>
+            <li>
+                <a routerLink='/about' style="margin: 0 15px;" (click)="isCollapsed = true">ABOUT US</a>
+            </li>
+            <li>
+                <a routerLink='/faq' style="margin: 0 15px;" (click)="isCollapsed = true">FAQ</a>
+            </li>
+            
+            <li>
+                <a routerLink='/howitworks' style="margin: 0 15px;" (click)="isCollapsed = true">HOW IT WORKS</a>
+            </li>
+            <li>
+                <a href='https://blog.carrycog.com/' style="margin: 0 15px;" (click)="isCollapsed = true">BLOG</a>
+            </li>
+            <li>
+                <a routerLink='/contact' style="margin: 0 15px;" (click)="isCollapsed = true">CONTACT US</a>
             </li>
         </ng-template>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" [attr.aria-expanded]="!navbarDropDown" 
-            role="button" (click)="navbarDropDown = !navbarDropDown"  aria-controls="navbarDropdownList"
-            data-toggle="dropdown" >
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownList">
-              <a class="dropdown-item" (click)="navbarCollapsed = true">Action</a>
-              <a class="dropdown-item" (click)="navbarCollapsed = true">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="navbarCollapsed = true">Something else here</a>
-            </div>
-          </li>
+         
         </ul>
-        <span class="github-buttons d-none d-lg-inline">
-            <ul>
-       
-                <li class="navbar-nav-item-user dropdown">
+        <ul class="nav navbar-nav navbar-right">
+            
+            <div *ngIf="token; then logOutBlock else LoginBlock"></div>
+                                
+        <ng-template #logOutBlock>  
+            <li style="margin-top:13px;"> <img src="{{CountryName}}" width="30px"  alt="Country Flag"></li> 
+            <li style="
+            color: lightgray;
+            margin-top: 15px;
+        ">  
+                <div *ngIf="!this.userName;then profile else welcomeMsg"></div>
+             <ng-template #profile></ng-template>    
+            <ng-template #welcomeMsg><span class="glyphicon glyphicon-user" style="margin: 0 15px;"></span>Welcome! {{userName}}</ng-template>
+            </li>       
+          <li class="dropdown" dropdown> 
+            
+            <a dropdownToggle class="dropdown-toggle" style="margin: 0 15px;">MY ACCOUNT <span class="caret"></span></a>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li>
+                    <a routerLink="/createpost" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-plus">
 
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">
-                        <i class="fa fa-user-circle-o navbar-nav-item-user-icon"></i>
-                        <div *ngIf="!this.userName;then profile else welcomeMsg"></div>    
-                            <ng-template #profile>Profile</ng-template>
-                            <ng-template #welcomeMsg>Welcome! {{userName}}</ng-template>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <div *ngIf="token; then logOutBlock else LoginBlock"></div>
-                            
-                        <ng-template #logOutBlock>
-                            <li>
-                                <a routerLink="/createpost">Create Post</a>
-                            </li>
-                            <li>
-                                <a routerLink="/myposts">My Posts</a>
-                            </li>
-                            <li>
-                                <a routerLink="/changepassword">Change Password</a>
-                            </li>
-                            <li>
-                                <a (click)="onLogout()">Logout</a>
-                            </li>
-                    </ng-template>
-                    <ng-template #LoginBlock>
-                        <li>
-                            <a routerLink="/login" >Login</a>
-                        </li>
-                        <li>
-                            <a routerLink="/registration" >Register</a>
-                        </li>
-                    </ng-template>
-                </ul>
-                
-                    
+                    </span>&nbsp;&nbsp;&nbsp;CREATE POST</a>
                 </li>
-              </ul>
-        </span>
+                <li>
+                    <a routerLink="/myposts" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-edit">
+
+                    </span>&nbsp;&nbsp;&nbsp; MY POSTS</a>
+                </li>
+                <li>
+                    <a routerLink="/inbox" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-envelope">
+
+                    </span>&nbsp;&nbsp;&nbsp; INBOX</a>
+                </li>
+                <li>
+                    <a routerLink="/changepassword" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-refresh">
+
+                    </span>&nbsp;&nbsp;&nbsp;CHANGE PASSWORD</a>
+                </li>
+            </ul>
+          </li>
+          
+          <li> <a (click)="onLogout()" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+        </ng-template>
+        <ng-template #LoginBlock>
+            
+           <li style="margin-top:13px;"> <img src="{{CountryName}}" width="30px"  alt="Country Flag"></li>
+            <li><a routerLink="/registration" style="margin: 0 15px;"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
+          <li><a routerLink="/login" style="margin: 0 15px;" (click)="isCollapsed = true"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+        </ng-template>
+        
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+<!--
+
+<nav class="navbar navbar-inverse  navbar-theme">
+    <div class="container">
+      <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+       <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" 
+            data-target="#myNavbar"  aria-expanded="false" 
+            aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed" 
+            [attr.aria-expanded]="!isCollapsed" aria-controls="myNavbar"> 
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" routerLink="">
+            <img src="./assets/img/logo.png" alt="Image Alternative text" title="Image Title" />
+        </a>
+      </div>
+       <div class="collapse navbar-collapse" id="myNavbar"> 
+        <ul class="nav navbar-nav">
+            <div *ngIf="token; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+          <li class="active">
+              <a routerLink='/Home'>Home</a>
+          </li>
+          <li>
+            <a routerLink='#'>About Us</a>
+        </li>
+        <li>
+            <a routerLink='#'>FAQ</a>
+        </li>
+        <li>
+            <a routerLink='#'>Contact Us</a>
+        </li>
+        <li>
+            <a routerLink='#'>How it works</a>
+        </li>
+        </ng-template>
+        <ng-template #elseBlock>
+            <li class="active">
+                <a routerLink="/Home">Home</a>
+            </li>
+            <li>
+                <a routerLink='#'>About Us</a>
+            </li>
+            <li>
+                <a routerLink='#'>FAQ</a>
+            </li>
+            <li>
+                <a routerLink='#'>Contact Us</a>
+            </li>
+            <li>
+                <a routerLink='#'>How it works</a>
+            </li>
+        </ng-template>
+         
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <div *ngIf="token; then logOutBlock else LoginBlock"></div>
+                                
+        <ng-template #logOutBlock>   
+            <li style="
+            color: lightgray;
+            margin-top: 15px;
+        ">  
+                <div *ngIf="!this.userName;then profile else welcomeMsg"></div>
+             <ng-template #profile></ng-template>    
+            <ng-template #welcomeMsg><span class="glyphicon glyphicon-user"></span>Welcome! {{userName}}</ng-template>
+            </li>       
+          <li class="dropdown"> 
+            
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account 
+                <span class="caret">
+
+            </span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a routerLink="/createpost"><span class="glyphicon glyphicon-plus">
+
+                    </span>Create Post</a>
+                </li>
+                <li>
+                    <a routerLink="/myposts"><span class="glyphicon glyphicon-pencil">
+
+                    </span> My Posts</a>
+                </li>
+                <li>
+                    <a routerLink="/changepassword"><span class="glyphicon glyphicon-refresh">
+
+                    </span>Change Password</a>
+                </li>
+            </ul>
+          </li>
+          
+          <li> <a (click)="onLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ng-template>
+        <ng-template #LoginBlock>
+            
+            <li><a routerLink="/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ng-template>
+        </ul>
       </div>
     </div>
-    </header>
+  </nav>
+
+-->

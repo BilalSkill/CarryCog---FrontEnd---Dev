@@ -685,8 +685,9 @@
      background: #333;
    }
    .navbar-brand > img {
-     max-width: 100%;
-     max-height: 100%;
+     width: 100px;
+     margin-top: -4px;
+     
    }
    .navbar-primary {
      background: #0093d2;
@@ -8958,8 +8959,10 @@
      border: 1px solid #e6e6e6;
      border-radius: 2px;
      margin-bottom: 10px;
-     position: relative;
+     position: sticky;
      z-index: 1;
+     /* For Sticky Notes */
+     position: -webkit-sticky; /* Safari */
    }
    .theme-ad-dark {
      border: none;
@@ -10650,7 +10653,8 @@
      filter: none;
    }
    .theme-footer-brand > img {
-     width: 55%;
+     width: 70%;
+     margin-top: -10px;
    }
    .theme-footer-brand-text {
      color: #b3b3b3;
@@ -12477,8 +12481,8 @@
      padding-bottom: 90px !important;
    }
    ._pv-100 {
-     padding-top: 100px !important;
-     padding-bottom: 100px !important;
+     padding-top: 40px !important;
+     padding-bottom: 60px !important;
    }
    ._pv-120 {
      padding-top: 120px !important;
@@ -14525,3 +14529,32 @@
    
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*Font-Class From CSS File*/
+
+
+/*Footer section*/
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+  height: 142px; /* .push must be the same height as .footer */
+}
+
+ .MobileShowDetails {
+  background:none!important;
+   border:none; 
+   padding:0!important;
+  
+  /*optional*/
+  font-family:arial,sans-serif; /*input has OS specific font-family*/
+   color:#069;
+   cursor:pointer;
+}
+.MobileShowDetails:hover{
+       text-decoration:underline;
+}

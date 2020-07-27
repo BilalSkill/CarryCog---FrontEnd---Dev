@@ -17,13 +17,17 @@ export class UserService {
   });
 
   ResetPasswordModel = this.fb.group({
-    Password: ['', Validators.required]
+    Passwords: this.fb.group({
+      Password: ['', [Validators.required, Validators.minLength(8)]],
+      ConfirmPassword: ['', Validators.required]
+    }, { validator: this.comparePasswords })
+
   });
 
   changePasswordModel = this.fb.group({
-    OldPassword: [''],
+    OldPassword: ['',[Validators.required, Validators.minLength(8)]],
     Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(4)]],
+      Password: ['', [Validators.required, Validators.minLength(8)]],
       ConfirmPassword: ['', Validators.required]
     }, { validator: this.comparePasswords })
 

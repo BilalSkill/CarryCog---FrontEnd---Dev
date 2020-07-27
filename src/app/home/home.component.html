@@ -1,6 +1,7 @@
+
 <div class="theme-hero-area front">
     <div class="theme-hero-area-bg-wrap">
-        <div class="theme-hero-area-bg" style="background-image:url(../assets/img/Slider1.png);" id="hero-banner"></div>
+        <div class="theme-hero-area-bg" style="background-image:url(../assets/img/Slider2.jpg);" id="hero-banner"></div>
         <div class="theme-hero-area-mask theme-hero-area-mask-strong"></div>
     </div>
     <div class="theme-hero-area-body">
@@ -11,59 +12,106 @@
                     <!--Desktop Seach Area Starts Here -->
                     <div class="theme-search-area _mob-h theme-search-area-stacked">
                         <div class="theme-search-area-header _mb-30 _ta-c _c-w">
-                            <h1 class="theme-search-area-title theme-search-area-title-sm">Carry Cog</h1>
-                            <p class="theme-search-area-subtitle">Space that Pays</p>
+
+
+                             <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml:true,
+      version:'v7.0'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+  attribution=setup_tool page_id="111198023799375">
+</div>
+<!-- Chat Ends here -->
+
+
+                            <h1 class="theme-search-area-title theme-search-area-title-sm">CarryCog</h1>
+                            <p class="theme-search-area-subtitle"><strong>Community Based Logistics System</strong></p><br>
+                            
+                            <p class="theme-search-area-subtitle">Create Post to Connect with Travelers / Requester <br>OR<br> Search for Existing</p>
+                        
                         </div>
                         <div class="theme-search-area-form _bsh-xxl _bsh-light" id="hero-search-form">
                             <form [formGroup]="this.SearchPostsModel" autocomplete="off" (submit)="onClickSearch()">
-                            <div class="row" data-gutter="none">
-                                <div class="col-md-4 ">
-                                    <div class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
-                                        <div class="theme-search-area-section-inner">
-                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                            <input class="theme-search-area-section-input typeahead"  name="FromCity" type="text" placeholder="From" data-provide="typeahead" formControlName="FromCity" (blur)="fromCityChange($event.target.value)"/>
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.required">From City is required</label> -->
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.pattern">Please select country from available list</label> -->
-                                            <div *ngIf="submitted && this.SearchPostsModel.get('FromCity').errors?.required" class="invalid-feedback">
-                                                <div *ngIf="this.SearchPostsModel.get('FromCity').errors.required"><label class="text-danger">From City is required</label></div>
+                                <div class="row" data-gutter="none">
+                                    <div class="col-md-4 ">
+                                        <div
+                                            class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
+                                            <div class="theme-search-area-section-inner">
+                                                <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                <input class="theme-search-area-section-input typeahead" name="FromCity"
+                                                    type="text" placeholder="Leaving from" data-provide="typeahead"
+                                                    formControlName="FromCity"
+                                                    (blur)="fromCityChange($event.target.value)" />
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.required">From City is required</label> -->
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.pattern">Please select country from available list</label> -->
+                                                <div *ngIf="submitted && this.SearchPostsModel.get('FromCity').errors?.required"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="this.SearchPostsModel.get('FromCity').errors.required">
+                                                        <label class="text-danger">From City is required</label></div>
+                                                </div>
+                                                <div *ngIf="!fromCityBool" class="invalid-feedback">
+                                                    <div *ngIf="!fromCityBool"><label class="text-danger">Please select
+                                                            FromCity From List.</label></div>
+                                                </div>
                                             </div>
-                                            <div *ngIf="!fromCityBool" class="invalid-feedback">
-                                              <div *ngIf="!fromCityBool"><label class="text-danger">Please select FromCity From List.</label></div>
-                                          </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <div class=" theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
-                                        <div class="theme-search-area-section-inner">
-                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                            <input class="theme-search-area-section-input typeahead"  name="ToCity"  type="text" placeholder="To" data-provide="typeahead" formControlName="ToCity" (blur)="ToCityChange($event.target.value)"/>
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').touched && _homeService.SearchPostsModel.get('ToCity').errors?.required">To City is required</label> -->
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').errors?.pattern">Please select country from available list</label> -->
-                                            <div *ngIf="submitted && this.SearchPostsModel.get('ToCity').errors?.required" class="invalid-feedback">
-                                                <div *ngIf="this.SearchPostsModel.get('ToCity').errors.required"><label class="text-danger">ToCity is required</label></div>
+                                    <div class="col-md-4 ">
+                                        <div
+                                            class=" theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
+                                            <div class="theme-search-area-section-inner">
+                                                <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                <input class="theme-search-area-section-input typeahead" name="ToCity"
+                                                    type="text" placeholder="Going to" data-provide="typeahead"
+                                                    formControlName="ToCity"
+                                                    (blur)="ToCityChange($event.target.value)" />
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').touched && _homeService.SearchPostsModel.get('ToCity').errors?.required">To City is required</label> -->
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').errors?.pattern">Please select country from available list</label> -->
+                                                <div *ngIf="submitted && this.SearchPostsModel.get('ToCity').errors?.required"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="this.SearchPostsModel.get('ToCity').errors.required">
+                                                        <label class="text-danger">ToCity is required</label></div>
+                                                </div>
+                                                <div *ngIf="!toCityBool" class="invalid-feedback">
+                                                    <div *ngIf="!toCityBool"><label class="text-danger">Please select
+                                                            ToCity From List.</label></div>
+                                                </div>
                                             </div>
-                                            <div *ngIf="!toCityBool" class="invalid-feedback">
-                                              <div *ngIf="!toCityBool"><label class="text-danger">Please select ToCity From List.</label></div>
-                                          </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="theme-payment-page-form-item theme-search-area-section form-group">
-                                        <i class="fa fa-angle-down"></i>
-                                        <select class="form-control" formControlName="PostType">
-                                            <option disabled value="null">Search For</option>
-                                            <option>Traveller</option>
-                                            <option>Requester</option>
-                                        </select>
+                                    <div class="col-md-3">
+                                        <div class="theme-payment-page-form-item theme-search-area-section form-group">
+                                            <i class="fa fa-angle-down"></i>
+                                            <select class="form-control" formControlName="PostType">
+                                                <!-- <option disabled value="null">Search For</option>
+                                                <option>Traveller (Carrier)</option>
+                                                <option>Requester</option> -->
+                                                <option *ngFor="let c of SearchOptions" [ngValue]="c">{{ c }}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>                        
-                                <div class="col-md-1 ">
-                                    <button class="theme-search-area-submit _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm theme-search-area-submit-no-border" type = "submit">Search</button>
+                                    <div class="col-md-1 ">
+                                        <button
+                                            class="theme-search-area-submit _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm theme-search-area-submit-no-border"
+                                            type="submit">Search</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>                            
+                            </form>
                         </div>
                     </div>
                     <!--Desktop Seach Area Ends Here -->
@@ -72,61 +120,79 @@
 
                     <div class="theme-search-area-inline _desk-h theme-search-area-inline-white">
                         <div class="theme-search-area-header _mb-30 _ta-c _c-w">
-                            <h1 class="theme-search-area-title theme-search-area-title-sm">Carry Cog</h1>
-                            <p class="theme-search-area-subtitle">Space that Pays</p>
-                        </div>
+                            <h1 class="theme-search-area-title theme-search-area-title-sm">CarryCog</h1>
+                            <p class="theme-search-area-subtitle"><strong>Community Based Logistics System</strong></p><br>
+                            
+                            <p class="theme-search-area-subtitle">Create Post to Connect with Travelers / Requester <br>OR<br> Search for Existing</p>
+                         </div>
                         <div class="theme-search-area-form _bsh-xxl _bsh-light" id="hero-search-form">
                             <form [formGroup]="this.SearchPostsModel" autocomplete="off" (submit)="onClickSearch()">
-                            <div class="row" data-gutter="none">
-                                <div class="col-md-4 ">
-                                    <div class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
-                                        <div class="theme-search-area-section-inner">
-                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                            <input class="theme-search-area-section-input typeahead"  name="FromCity" type="text" placeholder="From" data-provide="typeahead" formControlName="FromCity" (blur)="fromCityChange($event.target.value)"/>
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.required">From City is required</label> -->
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.pattern">Please select country from available list</label> -->
-                                            <div *ngIf="submitted && this.SearchPostsModel.get('FromCity').errors?.required" class="invalid-feedback">
-                                                <div *ngIf="this.SearchPostsModel.get('FromCity').errors.required"><label class="text-danger">From City is required</label></div>
+                                <div class="row" data-gutter="none">
+                                    <div class="col-md-4 ">
+                                        <div
+                                            class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
+                                            <div class="theme-search-area-section-inner">
+                                                <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                <input class="theme-search-area-section-input typeahead" name="FromCity"
+                                                    type="text" placeholder="Leaving from" data-provide="typeahead"
+                                                    formControlName="FromCity"
+                                                    (blur)="fromCityChange($event.target.value)" />
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.required">From City is required</label> -->
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('FromCity').touched && _homeService.SearchPostsModel.get('FromCity').errors?.pattern">Please select country from available list</label> -->
+                                                <div *ngIf="submitted && this.SearchPostsModel.get('FromCity').errors?.required"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="this.SearchPostsModel.get('FromCity').errors.required">
+                                                        <label class="text-danger">From City is required</label></div>
+                                                </div>
+                                                <div *ngIf="!fromCityBool" class="invalid-feedback">
+                                                    <div *ngIf="!fromCityBool"><label class="text-danger">Please select
+                                                            FromCity From List.</label></div>
+                                                </div>
                                             </div>
-                                            <div *ngIf="!fromCityBool" class="invalid-feedback">
-                                              <div *ngIf="!fromCityBool"><label class="text-danger">Please select FromCity From List.</label></div>
-                                          </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <div class=" theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
-                                        <div class="theme-search-area-section-inner">
-                                            <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                                            <input class="theme-search-area-section-input typeahead"  name="ToCity"  type="text" placeholder="To" data-provide="typeahead" formControlName="ToCity" (blur)="ToCityChange($event.target.value)"/>
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').touched && _homeService.SearchPostsModel.get('ToCity').errors?.required">To City is required</label> -->
-                                            <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').errors?.pattern">Please select country from available list</label> -->
-                                            <div *ngIf="submitted && this.SearchPostsModel.get('ToCity').errors?.required" class="invalid-feedback">
-                                                <div *ngIf="this.SearchPostsModel.get('ToCity').errors.required"><label class="text-danger">ToCity is required</label></div>
+                                    <div class="col-md-4 ">
+                                        <div
+                                            class=" theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-bg-white theme-search-area-section-no-border theme-search-area-section-mr">
+                                            <div class="theme-search-area-section-inner">
+                                                <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                                                <input class="theme-search-area-section-input typeahead" name="ToCity"
+                                                    type="text" placeholder="Going to" data-provide="typeahead"
+                                                    formControlName="ToCity"
+                                                    (blur)="ToCityChange($event.target.value)" />
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').touched && _homeService.SearchPostsModel.get('ToCity').errors?.required">To City is required</label> -->
+                                                <!-- <label class="text-danger" *ngIf="_homeService.SearchPostsModel.get('ToCity').errors?.pattern">Please select country from available list</label> -->
+                                                <div *ngIf="submitted && this.SearchPostsModel.get('ToCity').errors?.required"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="this.SearchPostsModel.get('ToCity').errors.required">
+                                                        <label class="text-danger">ToCity is required</label></div>
+                                                </div>
+                                                <div *ngIf="!toCityBool" class="invalid-feedback">
+                                                    <div *ngIf="!toCityBool"><label class="text-danger">Please select
+                                                            ToCity From List.</label></div>
+                                                </div>
                                             </div>
-                                            <div *ngIf="!toCityBool" class="invalid-feedback">
-                                              <div *ngIf="!toCityBool"><label class="text-danger">Please select ToCity From List.</label></div>
-                                          </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 ">
-                                    <div class="theme-payment-page-form-item theme-search-area-section form-group">
-                                        <i class="fa fa-angle-down"></i>
-                                        <select class="form-control" formControlName="PostType">
-                                            <option disabled value="null">Search For</option>
-                                            <option>Traveller</option>
-                                            <option>Requester</option>
-                                        </select>
+                                    <div class="col-md-3 ">
+                                        <div class="theme-payment-page-form-item theme-search-area-section form-group">
+                                            <i class="fa fa-angle-down"></i>
+                                            <select class="form-control" formControlName="PostType">
+                                                <option *ngFor="let c of SearchOptions" [ngValue]="c">{{ c }}</option>
+                                                <!-- <option>Traveller (Carrier)</option>
+                                                <option>Requester</option> -->
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>                                
-                                
-                                <div class="col-md-1 ">
-                                    <br>
-                                    <button class="theme-search-area-submit _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm theme-search-area-submit-no-border" type = "submit">Search</button>
+
+                                    <div class="col-md-1 ">
+                                        <br>
+                                        <button
+                                            class="theme-search-area-submit _mt-0 theme-search-area-submit-curved theme-search-area-submit-sm theme-search-area-submit-no-border"
+                                            type="submit">Search</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>                            
+                            </form>
                         </div>
                     </div>
                     <!--Mobile Seach Area Ends Here -->
@@ -141,44 +207,62 @@
         <div class="row row-col-static" id="sticky-parent" data-gutter="20">
             <div class="col-md-3 ">
                 <div class="sticky-col _mob-h">
-                   
+
                     <div class="theme-ad theme-ad-dark">
-                        <a class="theme-ad-link" href="#"></a>
+                        <a class="theme-ad-link" routerLink='/registration'></a>
                         <p class="theme-ad-sign">Advertisement</p>
-                        <img class="theme-ad-img" src="../assets/img/300x400.png" alt="Image Alternative text" title="Image Title" />
+                        <img class="theme-ad-img" src="../assets/img/Ad_CC.gif" alt="Image Alternative text"
+                            title="Image Title" />
                     </div>
                 </div>
             </div>
             <div class="col-md-6-5 ">
-                
+
                 <div class="theme-search-results">
                     <div class="_mob-h">
 
                         <!-- Desktop Listing Starts From here -->
                         <div *ngFor="let post of postResults; let index=index; let odd=odd; let even=even;">
                             <div *ngIf="even">
-                                <div class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
                                     <div class="theme-search-results-item-preview">
-                                        <a class="theme-search-results-item-mask-link" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
-                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top" href="#">
+                                        <a class="theme-search-results-item-mask-link"
+                                            href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                            data-toggle="collapse" attr.aria-expanded="false"
+                                            attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
+                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top"
+                                            href="#">
                                             <i class="fa fa-bookmark"></i>
                                             <span>Watch</span>
                                         </a>
                                         <div class="row" data-gutter="20">
                                             <div class="col-md-4">
                                                 <div class="theme-search-results-item-img-wrap">
-                                                    
-                                                        <img class="theme-search-results-item-img" style="border-bottom: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg" alt="Image Alternative text" title="Image Title" />
-                                                   
-                                                        <img class="theme-search-results-item-img" style="border-top: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg" alt="Image Alternative text" title="Image Title" /><br>
-                                                 
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-bottom: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-top: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" /><br>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                
-                                                <p class="theme-search-results-item-category">{{post.PostType}} Post</p>
-                                                <h5 class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg"><span *ngIf="post.PostType == 'Traveller'">I am travelling</span><span *ngIf="post.PostType != 'Traveller'">Is anyone coming</span> from <strong style="color:#ff6c2d">{{post.FromCity}}</strong> to <strong style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
-                                                <div class="theme-search-results-item-rating">
+
+                                                <p class="theme-search-results-item-category">{{post.PostType}} Post # <strong>{{post.PostNumber}}</strong></p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post.PostType == 'Traveller'">I am
+                                                        travelling</span><span *ngIf="post.PostType != 'Traveller'">Is
+                                                        anyone coming</span> from <strong
+                                                        style="color:#ff6c2d">{{post.FromCity}}</strong> to <strong
+                                                        style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
+                                                <!-- <div class="theme-search-results-item-rating">
                                                     <ul class="theme-search-results-item-rating-stars">
                                                         <li class="active">
                                                             <i class="fa fa-star"></i>
@@ -196,71 +280,168 @@
                                                             <i class="fa fa-star"></i>
                                                         </li>
                                                     </ul>
-                                                    <p class="theme-search-results-item-rating-title">82 reviews</p>
-                                                </div>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-clock-o"></i> Travel Date:  {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
+                                                     <p class="theme-search-results-item-rating-title">82 reviews</p>
+                                                </div> -->
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post.PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-shopping-bag"></i> Space Available:  {{ post.SpaceAvailable}} KG
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-shopping-bag"></i> 
+                                                    
+                                                    <span *ngIf="post.PostType == 'Traveller'">Space Available:</span> 
+                                                    <span *ngIf="post.PostType != 'Traveller'">Space Required:</span> 
+                                                    {{ post.SpaceAvailable}} KG
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-user"></i> Posted By:  {{ post.Author.FirstName +' '+ post.Author.LastName}}
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post.Author[0].FirstName +' '+ post.Author[0].LastName}}
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
                                                 </p>
+                                                      <!-- Add To Any Button Goes here -->
+                                                   <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;title=FacebookSharing" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+                                                           
+                                                      <!-- Add To Any Ends Here -->
                                                 
+                                              
+
                                             </div>
                                             <div class="col-md-2 ">
                                                 <div class="theme-search-results-item-book">
-                                                    <div class="theme-search-results-item-price" *ngIf="post.PostType == 'Traveller'">
-                                                        <p class="theme-search-results-item-price-sign">{{post.CountryCode}}</p>
-                                                        <p class="theme-search-results-item-price-tag">{{post.Cost}}/KG</p>
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post.PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            <strong>{{post.CountryCode}}</strong></p>
+                                                        <p class="theme-search-results-item-price-tag">{{post.Cost}}/KG
+                                                        </p>
                                                     </div>
-                                                    <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" (click)="onRequest(post.PostsID)"><span *ngIf="post.PostType == 'Traveller'">Request</span><span *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                    <div *ngIf="getCurrentUser() != post.Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post.PostsID)
+                                                            then requestSent;
+                                                            else NewRequest"></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>Request Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post.PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post.PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+                                                        
+
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;width: 90px;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
+                                                </div>
+                                                <div style="margin-top:80px">
+                                                    <p style="color:#ff6c2d; font-size:13px; float:right;" class="theme-search-results-item-price-tag">
+                                                        <span style="margin-top:15px;" class="glyphicon glyphicon-chevron-down"></span>&nbsp;Details</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="collapse theme-search-results-item-collapse"
+                                            id="searchResultsItem-{{post.PostsID}}">
+                                            <div class="theme-search-results-item-extend">
+                                                <a class="theme-search-results-item-extend-close"
+                                                    href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                                    data-toggle="collapse" attr.aria-expanded="false"
+                                                    attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
+                                                <div class="tabbable theme-search-results-item-tabs">
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="active" role="presentation">
+                                                            <a role="tab" data-toggle="tab" href="#tab-item--1"
+                                                                attr.aria-controls="tab-item--1">Details</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" role="tabpanel" id="tab-item--1">
+                                                            <p class="theme-search-results-item-tabs-details-desc">
+                                                                {{post.Details}}.</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="collapse theme-search-results-item-collapse" id="searchResultsItem-{{post.PostsID}}">
-                                        <div class="theme-search-results-item-extend">
-                                            <a class="theme-search-results-item-extend-close" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
-                                            <div class="tabbable theme-search-results-item-tabs">
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li class="active" role="presentation">
-                                                        <a role="tab" data-toggle="tab" href="#tab-item--1" attr.aria-controls="tab-item--1">Details</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" role="tabpanel" id="tab-item--1">
-                                                        <p class="theme-search-results-item-tabs-details-desc">{{post.Details}}.</p>
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        </div>
+                                </div>
+                                
+                                
                             </div>
                             <div *ngIf="odd">
-                                <div class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
                                     <div class="theme-search-results-item-preview">
-                                        <a class="theme-search-results-item-mask-link" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
-                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top" href="#">
+                                        <a class="theme-search-results-item-mask-link"
+                                            href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                            data-toggle="collapse" attr.aria-expanded="false"
+                                            attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
+                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top"
+                                            href="#">
                                             <i class="fa fa-bookmark"></i>
                                             <span>Watch</span>
                                         </a>
                                         <div class="row" data-gutter="20">
                                             <div class="col-md-4">
                                                 <div class="theme-search-results-item-img-wrap">
-                                                    
-                                                        <img class="theme-search-results-item-img" style="border-bottom: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg" alt="Image Alternative text" title="Image Title" />
-                                                   
-                                                        <img class="theme-search-results-item-img" style="border-top: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg" alt="Image Alternative text" title="Image Title" /><br>
-                                                 
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-bottom: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-top: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" /><br>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <p class="theme-search-results-item-category">{{post.PostType}} Post</p>
-                                                <h5 class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg"><span *ngIf="post.PostType == 'Traveller'">I am travelling</span><span *ngIf="post.PostType != 'Traveller'">Is anyone coming</span> from <strong style="color:#ff6c2d">{{post.FromCity}}</strong> to <strong style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
-                                                <div class="theme-search-results-item-rating">
+                                                <p class="theme-search-results-item-category">{{post.PostType}} Post # <strong>{{post.PostNumber}}</strong>
+                                                </p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post.PostType == 'Traveller'">I am
+                                                        travelling</span><span
+                                                        *ngIf="post.PostType != 'Traveller'">Is anyone coming</span>
+                                                    from <strong style="color:#ff6c2d">{{post.FromCity}}</strong> to
+                                                    <strong style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
+                                                <!-- <div class="theme-search-results-item-rating">
                                                     <ul class="theme-search-results-item-rating-stars">
                                                         <li class="active">
                                                             <i class="fa fa-star"></i>
@@ -278,79 +459,178 @@
                                                             <i class="fa fa-star"></i>
                                                         </li>
                                                     </ul>
-                                                    <p class="theme-search-results-item-rating-title">82 reviews</p>
-                                                </div>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-clock-o"></i> Travel Date:  {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
+                                                     <p class="theme-search-results-item-rating-title">82 reviews</p>
+                                                </div> -->
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post.PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-shopping-bag"></i> Space Available:  {{ post.SpaceAvailable}} KG
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-shopping-bag"></i> 
+                                                    
+                                                    <span *ngIf="post.PostType == 'Traveller'">Space Available:</span> 
+                                                    <span *ngIf="post.PostType != 'Traveller'">Space Required:</span> 
+                                                    {{ post.SpaceAvailable}} KG
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-user"></i> Posted By:  {{ post.Author.FirstName +' '+ post.Author.LastName}}
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post.Author[0].FirstName +' '+ post.Author[0].LastName}}
+                                                    
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
                                                 </p>
-                                                
+                                                      <!-- Add To Any Button Goes here -->
+                                                        
+                                                    <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+                                                           
+                                                      <!-- Add To Any Ends Here -->
                                             </div>
                                             <div class="col-md-2 ">
                                                 <div class="theme-search-results-item-book">
-                                                    <div class="theme-search-results-item-price" *ngIf="post.PostType == 'Traveller'">
-                                                        <p class="theme-search-results-item-price-sign">{{post.CountryCode}}</p>
-                                                        <p class="theme-search-results-item-price-tag">{{post.Cost}}/KG</p>
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post.PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            <strong>{{post.CountryCode}}</strong></p>
+                                                        <p class="theme-search-results-item-price-tag">
+                                                            {{post.Cost}}/KG</p>
                                                     </div>
-                                                    <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" (click)="onRequest(post.PostsID)"><span *ngIf="post.PostType == 'Traveller'">Request</span><span *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                    <div *ngIf="getCurrentUser() != post.Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post.PostsID)
+                                                        then requestSent;
+                                                        else NewRequest
+                                                        "></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span style="color:red;">Request Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post.PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post.PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;width: 90px;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
+                                                </div>
+                                                <div style="margin-top:80px">
+                                                    <p style="color:#ff6c2d; font-size:13px; float:right;" class="theme-search-results-item-price-tag">
+                                                        <span style="margin-top:15px;" class="glyphicon glyphicon-chevron-down"></span>&nbsp;Details</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="collapse theme-search-results-item-collapse"
+                                            id="searchResultsItem-{{post.PostsID}}">
+                                            <div class="theme-search-results-item-extend">
+                                                <a class="theme-search-results-item-extend-close"
+                                                    href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                                    data-toggle="collapse" attr.aria-expanded="false"
+                                                    attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
+                                                <div class="tabbable theme-search-results-item-tabs">
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="active" role="presentation">
+                                                            <a role="tab" data-toggle="tab" href="#tab-item--1"
+                                                                attr.aria-controls="tab-item--1">Details</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" role="tabpanel"
+                                                            id="tab-item--1">
+                                                            <p class="theme-search-results-item-tabs-details-desc">
+                                                                {{post.Details}}.</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="collapse theme-search-results-item-collapse" id="searchResultsItem-{{post.PostsID}}">
-                                        <div class="theme-search-results-item-extend">
-                                            <a class="theme-search-results-item-extend-close" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
-                                            <div class="tabbable theme-search-results-item-tabs">
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li class="active" role="presentation">
-                                                        <a role="tab" data-toggle="tab" href="#tab-item--1" attr.aria-controls="tab-item--1">Details</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" role="tabpanel" id="tab-item--1">
-                                                        <p class="theme-search-results-item-tabs-details-desc">{{post.Details}}.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        </div>
+                                </div>
+                                <!-- Desktop Listing Ends From here -->
                             </div>
+                            <!--          <a class="btn _tt-uc _fs-sm btn-white btn-block btn-lg" (onclick)="LoadAllPosts()">Load More Results</a>-->
                         </div>
-                        <!-- Desktop Listing Ends From here -->
                     </div>
                     <div class="_desk-h">
-                        
+
                         <!-- Mobile Listing Starts From here -->
 
                         <div *ngFor="let post of postResults; let index=index; let odd=odd; let even=even;">
                             <div *ngIf="even">
-                                <div class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
                                     <div class="theme-search-results-item-preview">
-                                        <a class="theme-search-results-item-mask-link" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
-                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top" href="#">
+                                        <!-- <a class="theme-search-results-item-mask-link"
+                                            href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                            data-toggle="collapse" attr.aria-expanded="false"
+                                            attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a> -->
+                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top"
+                                            href="#">
                                             <i class="fa fa-bookmark"></i>
                                             <span>Watch</span>
                                         </a>
                                         <div class="row" data-gutter="20">
                                             <div class="col-md-4">
                                                 <div class="theme-search-results-item-img-wrap">
-                                                        <img class="theme-search-results-item-img-mobile" style="border-right: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg" alt="Image Alternative text" title="Image Title" />
-                                                   
-                                                        <img class="theme-search-results-item-img-mobile" style="border-left: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg" alt="Image Alternative text" title="Image Title" /><br>
-                                                 
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-right: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-left: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg"
+                                                        alt="Image Alternative text"
+                                                        title="Image Title" /><br>
+
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="col-md-6">
-                                                <p class="theme-search-results-item-category">{{post.PostType}} Post</p>
-                                                <h5 class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg"> <span *ngIf="post.PostType == 'Traveller'">I am travelling</span><span *ngIf="post.PostType != 'Traveller'">Is anyone coming</span>  from <strong style="color:#ff6c2d">{{post.FromCity}}</strong> to <strong style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
-                                                <div class="theme-search-results-item-rating">
+                                                <p class="theme-search-results-item-category">
+                                                    {{post.PostType}} Post # <strong>{{post.PostNumber}}</strong></p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post.PostType == 'Traveller'">I am
+                                                        travelling</span><span
+                                                        *ngIf="post.PostType != 'Traveller'">Is anyone
+                                                        coming</span> from <strong
+                                                        style="color:#ff6c2d">{{post.FromCity}}</strong> to
+                                                    <strong style="color:#ff6c2d">{{post.ToCity}}</strong>
+                                                </h5>
+                                                <!-- <div class="theme-search-results-item-rating">
                                                     <ul class="theme-search-results-item-rating-stars">
                                                         <li class="active">
                                                             <i class="fa fa-star"></i>
@@ -368,72 +648,184 @@
                                                             <i class="fa fa-star"></i>
                                                         </li>
                                                     </ul>
-                                                    <p class="theme-search-results-item-rating-title">82 reviews</p>
-                                                </div>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-clock-o"></i> Travel Date:  {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
+                                                     <p class="theme-search-results-item-rating-title">82
+                                                        reviews</p> 
+                                                </div> -->
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post.PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-shopping-bag"></i> Space Available:  {{ post.SpaceAvailable}} KG
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-shopping-bag"></i> 
+                                                    
+                                                    <span *ngIf="post.PostType == 'Traveller'">Space Available:</span> 
+                                                    <span *ngIf="post.PostType != 'Traveller'">Space Required:</span> 
+                                                    {{ post.SpaceAvailable}} KG
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-user"></i> Posted By:  {{ post.Author.FirstName +' '+ post.Author.LastName}}
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post.Author[0].FirstName +' '+ post.Author[0].LastName}}
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
                                                 </p>
-                                                
+                                                      <!-- Add To Any Button Goes here -->
+                                                        
+                                                    <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+
                                             </div>
                                             <div class="col-md-2 ">
                                                 <div class="theme-search-results-item-book">
-                                                    <div class="theme-search-results-item-price" *ngIf="post.PostType == 'Traveller'">
-                                                        <p class="theme-search-results-item-price-sign">{{post.CountryCode}}</p>
-                                                        <p class="theme-search-results-item-price-tag">{{post.Cost}}/KG</p>
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post.PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            <strong>{{post.CountryCode}}</strong></p>
+                                                        <p class="theme-search-results-item-price-tag">
+                                                            {{post.Cost}}/KG</p>
                                                     </div>
-                                                    <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" (click)="onRequest(post.PostsID)"> <span *ngIf="post.PostType == 'Traveller'">Request</span><span *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                    <div *ngIf="getCurrentUser() != post.Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post.PostsID)
+                                                then requestSent;
+                                                else NewRequest
+                                                "></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span style="color:red;">Request Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post.PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post.PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+
+
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
                                                 </div>
+                                                <p>
+                                                    <button style="border: none; background: none; cursor: pointer; float: right; margin-top:5px; color:#ff6c2d;" type="button" class="collapsed" 
+                                                    (click)="isCollapsed = !isCollapsed" aria-expanded="false"> 
+                                                            <span style="margin-top:15px;" class="glyphicon glyphicon-chevron-down"></span>&nbsp;Details
+                                                            </button>
+                                                            
+                                                  </p>
+                                                  <div class="collapse" id="collapseExample" [collapse]=isCollapsed>
+                                                    <div class="card card-body" (click)="isCollapsed = true">
+                                                        <br><hr> {{post.Details}}
+                                                    </div>
+                                                  </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="collapse theme-search-results-item-collapse" id="searchResultsItem-{{post.PostsID}}">
-                                        <div class="theme-search-results-item-extend">
-                                            <a class="theme-search-results-item-extend-close" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
-                                            <div class="tabbable theme-search-results-item-tabs">
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li class="active" role="presentation">
-                                                        <a role="tab" data-toggle="tab" href="#tab-item--1" attr.aria-controls="tab-item--1">Details</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" role="tabpanel" id="tab-item--1">
-                                                        <p class="theme-search-results-item-tabs-details-desc">{{post.Details}}.</p>
-                                                    </div> 
+                                        
+                                       <!-- <div class="collapse theme-search-results-item-collapse"
+                                            id="searchResultsItem-{{post.PostsID}}">
+                                            <div class="theme-search-results-item-extend">
+                                                <a class="theme-search-results-item-extend-close"
+                                                    href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                                    data-toggle="collapse" attr.aria-expanded="false"
+                                                    attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
+                                                <div class="tabbable theme-search-results-item-tabs">
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="active" role="presentation">
+                                                            <a role="tab" data-toggle="tab"
+                                                                href="#tab-item--1"
+                                                                attr.aria-controls="tab-item--1">Details</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" role="tabpanel"
+                                                            id="tab-item--1">
+                                                            <p
+                                                                class="theme-search-results-item-tabs-details-desc">
+                                                                {{post.Details}}.</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                        </div>
+                                </div>
+                                
                             </div>
                             <div *ngIf="odd">
-                                <div class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
                                     <div class="theme-search-results-item-preview">
-                                        <a class="theme-search-results-item-mask-link" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a>
-                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top" href="#">
+                                        <!-- <a class="theme-search-results-item-mask-link"
+                                            href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                            data-toggle="collapse" attr.aria-expanded="false"
+                                            attr.aria-controls="searchResultsItem-{{post.PostsID}}"></a> -->
+                                        <a class="theme-search-results-item-bookmark theme-search-results-item-bookmark-top"
+                                            href="#">
                                             <i class="fa fa-bookmark"></i>
                                             <span>Watch</span>
                                         </a>
                                         <div class="row" data-gutter="20">
                                             <div class="col-md-4">
                                                 <div class="theme-search-results-item-img-wrap">
-                                                    
-                                                    <img class="theme-search-results-item-img-mobile" style="border-right: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg" alt="Image Alternative text" title="Image Title" />
-                                                   
-                                                    <img class="theme-search-results-item-img-mobile" style="border-left: 2px solid gray;" src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg" alt="Image Alternative text" title="Image Title" /><br>
-                                             
+
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-right: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.FromCountry}}.jpg"
+                                                        alt="Image Alternative text"
+                                                        title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-left: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post.ToCountry}}.jpg"
+                                                        alt="Image Alternative text"
+                                                        title="Image Title" /><br>
+
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="col-md-6">
-                                                <p class="theme-search-results-item-category">{{post.PostType}} Post</p>
-                                                <h5 class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg"><span *ngIf="post.PostType == 'Traveller'">I am travelling</span><span *ngIf="post.PostType != 'Traveller'">Is anyone coming</span> from <strong style="color:#ff6c2d">{{post.FromCity}}</strong> to <strong style="color:#ff6c2d">{{post.ToCity}}</strong></h5>
-                                                <div class="theme-search-results-item-rating">
+                                                <p class="theme-search-results-item-category">
+                                                    {{post.PostType}} Post # <strong>{{post.PostNumber}}</strong></p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post.PostType == 'Traveller'">I am
+                                                        travelling</span><span
+                                                        *ngIf="post.PostType != 'Traveller'">Is anyone
+                                                        coming</span> from <strong
+                                                        style="color:#ff6c2d">{{post.FromCity}}</strong>
+                                                    to <strong
+                                                        style="color:#ff6c2d">{{post.ToCity}}</strong>
+                                                </h5>
+                                                <!-- <div class="theme-search-results-item-rating">
                                                     <ul class="theme-search-results-item-rating-stars">
                                                         <li class="active">
                                                             <i class="fa fa-star"></i>
@@ -451,377 +843,557 @@
                                                             <i class="fa fa-star"></i>
                                                         </li>
                                                     </ul>
-                                                    <p class="theme-search-results-item-rating-title">82 reviews</p>
-                                                </div>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-clock-o"></i> Travel Date:  {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
+                                                     <p class="theme-search-results-item-rating-title">82
+                                                        reviews</p> 
+                                                </div> -->
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post.PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post.TravelDate, 'dd/MMM/yyyy')}}
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-shopping-bag"></i> Space Available:  {{ post.SpaceAvailable}} KG
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-shopping-bag"></i>
+                                                    <span *ngIf="post.PostType == 'Traveller'">Space Available:</span> 
+                                                    <span *ngIf="post.PostType != 'Traveller'">Space Required:</span> 
+                                                    {{ post.SpaceAvailable}} KG
                                                 </p>
-                                                <p class="theme-search-results-item-time" *ngIf="post.PostType == 'Traveller'">
-                                                    <i class="fa fa-user"></i> Posted By:  {{ post.Author.FirstName +' '+ post.Author.LastName}}
+                                                <p class="theme-search-results-item-time">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post.Author[0].FirstName +' '+ post.Author[0].LastName}}
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
                                                 </p>
-                                                
+                                                      <!-- Add To Any Button Goes here -->
+                                                        
+                                                    <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+
                                             </div>
                                             <div class="col-md-2 ">
                                                 <div class="theme-search-results-item-book">
-                                                    <div class="theme-search-results-item-price" *ngIf="post.PostType == 'Traveller'">
-                                                        <p class="theme-search-results-item-price-sign">{{post.CountryCode}}</p>
-                                                        <p class="theme-search-results-item-price-tag">{{post.Cost}}/KG</p>
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post.PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            <strong>{{post.CountryCode}}</strong></p>
+                                                        <p class="theme-search-results-item-price-tag">
+                                                            {{post.Cost}}/KG</p>
                                                     </div>
-                                                    <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" (click)="onRequest(post.PostsID)"><span *ngIf="post.PostType == 'Traveller'">Request</span><span *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                    <div *ngIf="getCurrentUser() != post.Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post.PostsID)
+                                            then requestSent;
+                                            else NewRequest
+                                            "></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span style="color:red;">Request
+                                                                    Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post.PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post.PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post.PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
                                                 </div>
+                                                <p>
+                                                    <button style="border: none; background: none; cursor: pointer; float: right; margin-top:5px; color:#ff6c2d;" type="button" class="collapsed" 
+                                                    (click)="isCollapsed = !isCollapsed" aria-expanded="false"> 
+                                                            <span style="margin-top:15px;" class="glyphicon glyphicon-chevron-down"></span>&nbsp;Details
+                                                            </button>
+                                                            
+                                                  </p>
+                                                  <div class="collapse" id="collapseExample" [collapse]=isCollapsed>
+                                                    <div class="card card-body" (click)="isCollapsed = true">
+                                                      <br><hr> {{post.Details}}
+                                                    </div>
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="collapse theme-search-results-item-collapse" id="searchResultsItem-{{post.PostsID}}">
+                                    <div class="collapse theme-search-results-item-collapse"
+                                        id="searchResultsItem-{{post.PostsID}}">
                                         <div class="theme-search-results-item-extend">
-                                            <a class="theme-search-results-item-extend-close" href="#searchResultsItem-{{post.PostsID}}" role="button" data-toggle="collapse" attr.aria-expanded="false" attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
+                                            <a class="theme-search-results-item-extend-close"
+                                                href="#searchResultsItem-{{post.PostsID}}" role="button"
+                                                data-toggle="collapse" attr.aria-expanded="false"
+                                                attr.aria-controls="searchResultsItem-{{post.PostsID}}">&#10005;</a>
                                             <div class="tabbable theme-search-results-item-tabs">
                                                 <ul class="nav nav-tabs" role="tablist">
                                                     <li class="active" role="presentation">
-                                                        <a role="tab" data-toggle="tab" href="#tab-item--1" attr.aria-controls="tab-item--1">Details</a>
+                                                        <a role="tab" data-toggle="tab"
+                                                            href="#tab-item--1"
+                                                            attr.aria-controls="tab-item--1">Details</a>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div class="tab-pane active" role="tabpanel" id="tab-item--1">
-                                                        <p class="theme-search-results-item-tabs-details-desc">{{post.Details}}.</p>
+                                                    <div class="tab-pane active" role="tabpanel"
+                                                        id="tab-item--1">
+                                                        <p
+                                                            class="theme-search-results-item-tabs-details-desc">
+                                                            {{post.Details}}.</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                        </div>
-                            </div>
-                        </div>
-                         <!-- Mobile Listing Ends From here -->
-                    </div>
-
-                    <!-- Closing this Mobile Filter Section We are not using it for now.-->
-                    <div class="theme-search-results-mobile-filters" id="mobileFilters">
-                        <a class="theme-search-results-mobile-filters-btn magnific-inline" href="#MobileFilters">
-                            <i class="fa fa-filter"></i>Filters
-                        </a>
-                        <div class="magnific-popup mfp-hide" id="MobileFilters">
-                            <div class="theme-search-results-sidebar">
-                                <div class="theme-search-results-sidebar-sections">
-                                    <div class="theme-search-results-sidebar-section">
-                                        <h5 class="theme-search-results-sidebar-section-title">Type</h5>
-                                        <div class="theme-search-results-sidebar-section-checkbox-list">
-                                            <div class="theme-search-results-sidebar-section-checkbox-list-items">
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">
-                                                            Immersions
-                                                            <span class="icheck-sub-title">Happen over multiple days</span>
-                                                        </span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">215</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">
-                                                            Experiences
-                                                            <span class="icheck-sub-title">Last 2 or more hours</span>
-                                                        </span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">193</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="theme-search-results-sidebar-section">
-                                        <h5 class="theme-search-results-sidebar-section-title">Price</h5>
-                                        <div class="theme-search-results-sidebar-section-price">
-                                            <input id="price-slider-mob" name="price-slider" data-min="100" data-max="500" />
-                                        </div>
-                                    </div>
-                                    <div class="theme-search-results-sidebar-section">
-                                        <h5 class="theme-search-results-sidebar-section-title">Review Score</h5>
-                                        <div class="theme-search-results-sidebar-section-checkbox-list">
-                                            <div class="theme-search-results-sidebar-section-checkbox-list-items">
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Excellent</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">357</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Good</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">443</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Okay</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">298</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Mediocre</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">149</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Poor</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">141</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="theme-search-results-sidebar-section">
-                                        <h5 class="theme-search-results-sidebar-section-title">Category</h5>
-                                        <div class="theme-search-results-sidebar-section-checkbox-list">
-                                            <div class="theme-search-results-sidebar-section-checkbox-list-items">
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Arts</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">268</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Business</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">492</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Entertainment</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">290</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Fashion</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">311</span>
-                                                </div>
-                                            </div>
-                                            <div class="collapse" id="mobile-SearchResultsCheckboxCategory">
-                                                <div class="theme-search-results-sidebar-section-checkbox-list-items theme-search-results-sidebar-section-checkbox-list-items-expand">
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Food &amp; Drink</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">469</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">History</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">138</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Music</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">411</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Lifestyle</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">427</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Nature</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">204</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Nightlife</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">139</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Social Impact</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">225</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Sports</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">170</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Technology</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">141</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Wellness</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">115</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a class="theme-search-results-sidebar-section-checkbox-list-expand-link" role="button" data-toggle="collapse" href="#mobile-SearchResultsCheckboxCategory" attr.aria-expanded="false">
-                                                Show more
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="theme-search-results-sidebar-section">
-                                        <h5 class="theme-search-results-sidebar-section-title">Neighborhoods</h5>
-                                        <div class="theme-search-results-sidebar-section-checkbox-list">
-                                            <div class="theme-search-results-sidebar-section-checkbox-list-items">
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Westminster</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">231</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Kensington</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">392</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Camden</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">255</span>
-                                                </div>
-                                                <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                    <label class="icheck-label">
-                                                        <input class="icheck" type="checkbox" />
-                                                        <span class="icheck-title">Hammersmith</span>
-                                                    </label>
-                                                    <span class="theme-search-results-sidebar-section-checkbox-list-amount">245</span>
-                                                </div>
-                                            </div>
-                                            <div class="collapse" id="mobile-SearchResultsCheckboxNeighborhoods">
-                                                <div class="theme-search-results-sidebar-section-checkbox-list-items theme-search-results-sidebar-section-checkbox-list-items-expand">
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Southwark</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">299</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Tower Hamlets</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">344</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Islington</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">379</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">City of London</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">191</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Lambeth</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">335</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Hackney</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">479</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Greenwich</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">122</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Wandsworth</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">395</span>
-                                                    </div>
-                                                    <div class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
-                                                        <label class="icheck-label">
-                                                            <input class="icheck" type="checkbox" />
-                                                            <span class="icheck-title">Lewisham</span>
-                                                        </label>
-                                                        <span class="theme-search-results-sidebar-section-checkbox-list-amount">122</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a class="theme-search-results-sidebar-section-checkbox-list-expand-link" role="button" data-toggle="collapse" href="#mobile-SearchResultsCheckboxNeighborhoods" attr.aria-expanded="false">
-                                                Show more
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Mobile Listing Ends From here -->
                         </div>
+
+                        <!-- Closing this Mobile Filter Section We are not using it for now.-->
+                        <!-- <div class="theme-search-results-mobile-filters" id="mobileFilters">
+                            <a class="theme-search-results-mobile-filters-btn magnific-inline"
+                                href="#MobileFilters">
+                                <i class="fa fa-filter"></i>Filters
+                            </a>
+                            <div class="magnific-popup mfp-hide" id="MobileFilters">
+                                <div class="theme-search-results-sidebar">
+                                    <div class="theme-search-results-sidebar-sections">
+                                        <div class="theme-search-results-sidebar-section">
+                                            <h5 class="theme-search-results-sidebar-section-title">Type</h5>
+                                            <div class="theme-search-results-sidebar-section-checkbox-list">
+                                                <div
+                                                    class="theme-search-results-sidebar-section-checkbox-list-items">
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">
+                                                                Immersions
+                                                                <span class="icheck-sub-title">Happen over
+                                                                    multiple days</span>
+                                                            </span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">215</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">
+                                                                Experiences
+                                                                <span class="icheck-sub-title">Last 2 or
+                                                                    more hours</span>
+                                                            </span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">193</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="theme-search-results-sidebar-section">
+                                            <h5 class="theme-search-results-sidebar-section-title">Price
+                                            </h5>
+                                            <div class="theme-search-results-sidebar-section-price">
+                                                <input id="price-slider-mob" name="price-slider"
+                                                    data-min="100" data-max="500" /> 
+                                            </div>
+                                        </div>
+                                        <div class="theme-search-results-sidebar-section">
+                                            <h5 class="theme-search-results-sidebar-section-title">Review
+                                                Score</h5>
+                                            <div class="theme-search-results-sidebar-section-checkbox-list">
+                                                <div
+                                                    class="theme-search-results-sidebar-section-checkbox-list-items">
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Excellent</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">357</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Good</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">443</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Okay</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">298</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Mediocre</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">149</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Poor</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">141</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="theme-search-results-sidebar-section">
+                                            <h5 class="theme-search-results-sidebar-section-title">Category
+                                            </h5>
+                                            <div class="theme-search-results-sidebar-section-checkbox-list">
+                                                <div
+                                                    class="theme-search-results-sidebar-section-checkbox-list-items">
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Arts</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">268</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Business</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">492</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Entertainment</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">290</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Fashion</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">311</span>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse"
+                                                    id="mobile-SearchResultsCheckboxCategory">
+                                                    <div
+                                                        class="theme-search-results-sidebar-section-checkbox-list-items theme-search-results-sidebar-section-checkbox-list-items-expand">
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Food &amp;
+                                                                    Drink</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">469</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">History</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">138</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Music</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">411</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Lifestyle</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">427</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Nature</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">204</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Nightlife</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">139</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Social
+                                                                    Impact</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">225</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Sports</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">170</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Technology</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">141</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Wellness</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">115</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="theme-search-results-sidebar-section-checkbox-list-expand-link"
+                                                    role="button" data-toggle="collapse"
+                                                    href="#mobile-SearchResultsCheckboxCategory"
+                                                    attr.aria-expanded="false">
+                                                    fmore
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="theme-search-results-sidebar-section">
+                                            <h5 class="theme-search-results-sidebar-section-title">
+                                                Neighborhoods</h5>
+                                            <div class="theme-search-results-sidebar-section-checkbox-list">
+                                                <div
+                                                    class="theme-search-results-sidebar-section-checkbox-list-items">
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Westminster</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">231</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Kensington</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">392</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Camden</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">255</span>
+                                                    </div>
+                                                    <div
+                                                        class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                        <label class="icheck-label">
+                                                            <input class="icheck" type="checkbox" />
+                                                            <span class="icheck-title">Hammersmith</span>
+                                                        </label>
+                                                        <span
+                                                            class="theme-search-results-sidebar-section-checkbox-list-amount">245</span>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse"
+                                                    id="mobile-SearchResultsCheckboxNeighborhoods">
+                                                    <div
+                                                        class="theme-search-results-sidebar-section-checkbox-list-items theme-search-results-sidebar-section-checkbox-list-items-expand">
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Southwark</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">299</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Tower
+                                                                    Hamlets</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">344</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Islington</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">379</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">City of
+                                                                    London</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">191</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Lambeth</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">335</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Hackney</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">479</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Greenwich</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">122</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Wandsworth</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">395</span>
+                                                        </div>
+                                                        <div
+                                                            class="checkbox theme-search-results-sidebar-section-checkbox-list-item">
+                                                            <label class="icheck-label">
+                                                                <input class="icheck" type="checkbox" />
+                                                                <span class="icheck-title">Lewisham</span>
+                                                            </label>
+                                                            <span
+                                                                class="theme-search-results-sidebar-section-checkbox-list-amount">122</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="theme-search-results-sidebar-section-checkbox-list-expand-link"
+                                                    role="button" data-toggle="collapse"
+                                                    href="#mobile-SearchResultsCheckboxNeighborhoods"
+                                                    attr.aria-expanded="false">
+                                                    Show more
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- Mobile Filter Section ends here -->
                     </div>
-                    <!-- Mobile Filter Section ends here -->
                 </div>
-    <!--          <a class="btn _tt-uc _fs-sm btn-white btn-block btn-lg" (onclick)="LoadAllPosts()">Load More Results</a>-->
+                
             </div>
-            <div class="col-md-2-5 ">
+            <div class="col-md-2-5">
                 <div class="sticky-col _mob-h">
                     <div class="theme-ad _mb-20 theme-ad-dark">
-                        <a class="theme-ad-link" href="#"></a>
+                        <a class="theme-ad-link" routerLink='/registration'></a>
                         <p class="theme-ad-sign">Advertisement</p>
-                        <img class="theme-ad-img" src="../assets/img/300x600.png" alt="Image Alternative text" title="Image Title" />
+                        <img class="theme-ad-img" src="../assets/img/Ad_CC_35.png" alt="Image Alternative text"
+                            title="Image Title" />
                     </div>
                     <div class="theme-ad theme-ad-dark">
-                        <a class="theme-ad-link" href="#"></a>
+                        <a class="theme-ad-link" routerLink='/registration'></a>
                         <p class="theme-ad-sign">Advertisement</p>
-                        <img class="theme-ad-img" src="../assets/img/300x500.png" alt="Image Alternative text" title="Image Title" />
+                        <img class="theme-ad-img" src="../assets/img/Ad_CC_36.png" alt="Image Alternative text"
+                            title="Image Title" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

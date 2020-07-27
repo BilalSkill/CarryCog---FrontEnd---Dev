@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://api.carrycog.com/api'
+  baseUrl: 'https://api.carrycog.com/api'
 };

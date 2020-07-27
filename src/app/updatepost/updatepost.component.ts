@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScriptService } from '../shared/script.service';
-
+import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-updatepost',
   templateUrl: './updatepost.component.html',
@@ -20,26 +20,41 @@ export class UpdatepostComponent implements OnInit {
   today: Date;
   maxDate: Date;
   minDate: Date;
+  
   Currencies;
   loadAPI: Promise<any>;
-  constructor(private _scriptLoader:ScriptService, public _homeService:HomeService,private toastr:ToastrService, private router:Router) { 
+  title = 'CarryCog - Update Post';
+  constructor(private titleService: Title, private metaService: Meta,private _scriptLoader:ScriptService, public _homeService:HomeService,private toastr:ToastrService, private router:Router) { 
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
       resolve(true);
   });
   this.today = new Date();
     this.minDate = new Date(this.today.getFullYear(), this.today.getMonth(), 2);
+    console.log(this._homeService.EditPostModel.value.CountryCode)
   }
   
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.metaService.addTags([
+      {name: 'keywords', content: 'CarryCog, Logistics, Delivery, Travelling, Carrying, Parsel'},
+      {name: 'description', content: 'Cargo takes more than 30 days to deliver while the epxress delivery charges way more money keeping this is mind we have developed this free solution which saves both time and money'},
+      {name: 'robots', content: 'home, aboutus'}
+    ]);
+
+
     if(localStorage.getItem('token') !=null){
       this.getListOfCurrencies();
+     
     }else{
       this.toastr.error('Please login / register first.', 'No Session Found!');
           this.router.navigateByUrl("/login");
     }
   }
-
+  ngAfterContentInit(): void{
+    console.log("In Update post component: "+this._homeService.CurrencyValueFromPost);
+    
+  }
   public loadScript() {        
     var isFound = false;
     var scripts = document.getElementsByTagName("script")
@@ -101,11 +116,9 @@ formType:string = "Traveller";
     this.formType = this._homeService.EditPostModel.get('PostType').value;
     switch(this.formType) {  
       case "Traveller": { 
-        console.log('Form changed to Traveller')
          break;
       }
       case "Requester": { 
-        console.log('Form changed to Requester')
          break;
       }      
    }
@@ -144,7 +157,7 @@ if(this.toCity != ''){
          if (res.succeeded) {
           this._homeService.EditPostModel.reset();
           this.toastr.success('Post has been updated and waiting for Admins approval.', 'Waiting For Approvals');
-          this.router.navigateByUrl("/Home");
+          this.router.navigateByUrl("/myposts");
         } else {
           console.log(res.errors);
           this.toastr.error(res.errors, 'Error');

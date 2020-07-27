@@ -1,0 +1,390 @@
+<div class="theme-hero-area front">
+    <div class="theme-hero-area-bg-wrap">
+        <div class="theme-hero-area-bg" style="background-image:url(../assets/img/Slider2.jpg);" id="hero-banner"></div>
+        <div class="theme-hero-area-mask theme-hero-area-mask-strong"></div>
+    </div>
+    <div class="theme-hero-area-body">
+        <div class="container">
+            <div class="row _pv-100">
+                <div class="col-md-10 col-md-offset-1">
+                  <!-- Search Areas for Desktop and Mobile removed from here -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="theme-page-section theme-page-section-dark theme-page-section-lg">
+    <div class="container">
+        <div class="row row-col-static" id="sticky-parent" data-gutter="20">
+            <div class="col-md-3 ">
+                <div class="sticky-col _mob-h">
+
+                    <div class="theme-ad theme-ad-dark">
+                        <a class="theme-ad-link" href="#"></a>
+                        <p class="theme-ad-sign">Advertisement</p>
+                        <img class="theme-ad-img" src="../assets/img/300x400.png" alt="Image Alternative text"
+                            title="Image Title" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6-5 ">
+
+                <div class="theme-search-results">
+                    <div class="_mob-h">
+
+                        <!-- Desktop Listing Starts From here -->
+                            <div>
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                    <div class="theme-search-results-item-preview">                                        
+                                        <div class="row" data-gutter="20">
+                                            <div class="col-md-4">
+                                                <div class="theme-search-results-item-img-wrap">
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-bottom: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post[0].FromCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img"
+                                                        style="border-top: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post[0].ToCountry}}.jpg"
+                                                        alt="Image Alternative text" title="Image Title" /><br>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="theme-search-results-item-category">{{post[0].PostType}} Post # <strong>{{post[0].PostNumber}}</strong>
+                                                </p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post[0].PostType == 'Traveller'">I am
+                                                        travelling</span><span
+                                                        *ngIf="post[0].PostType != 'Traveller'">Is anyone coming</span>
+                                                    from <strong style="color:#ff6c2d">{{post[0].FromCity}}</strong> to
+                                                    <strong style="color:#ff6c2d">{{post[0].ToCity}}</strong></h5>
+                                                <div class="theme-search-results-item-rating">
+                                                    <ul class="theme-search-results-item-rating-stars">
+                                                        <li class="active">
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li class="active">
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                    </ul>
+                                                    <p class="theme-search-results-item-rating-title">82 reviews</p>
+                                                </div>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post[0].TravelDate, 'dd/MMM/yyyy')}}
+                                                </p>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-shopping-bag"></i> Space Available:
+                                                    {{ post[0].SpaceAvailable}} KG
+                                                </p>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post[0].Author[0].FirstName +' '+ post[0].Author[0].LastName}}
+                                                    
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
+                                                </p>
+                                                      <!-- Add To Any Button Goes here -->
+                                                        
+                                                    <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+                                                    <div>
+                                                        <hr>
+                                                        <h4><strong>Details:</strong></h4>
+                                                        <p
+                                                            class="theme-search-results-item-tabs-details-desc">
+                                                            {{post[0].Details}}</p>
+                                                    </div>
+                                                      <!-- Add To Any Ends Here -->
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <div class="theme-search-results-item-book">
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post[0].PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            {{post[0].CountryCodeValue}}</p>
+                                                        <p class="theme-search-results-item-price-tag">
+                                                            {{post[0].Cost}}/KG</p>
+                                                    </div>
+                                                    <div *ngIf="getCurrentUser() != post[0].Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post[0].PostsID)
+                                                        then requestSent;
+                                                        else NewRequest
+                                                        "></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span style="color:red;">Request Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post[0].PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post[0].PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post[0].PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;width: 90px;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Desktop Listing Ends From here -->
+                            </div>
+                            
+                    </div>
+                    <div class="_desk-h">
+
+                        <!-- Mobile Listing Starts From here -->
+
+                        
+                            <div>
+                                <div
+                                    class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
+                                    <div class="theme-search-results-item-preview">
+                                       
+                                        <div class="row" data-gutter="20">
+                                            <div class="col-md-4">
+                                                <div class="theme-search-results-item-img-wrap">
+
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-right: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post[0].FromCountry}}.jpg"
+                                                        alt="Image Alternative text"
+                                                        title="Image Title" />
+
+                                                    <img class="theme-search-results-item-img-mobile"
+                                                        style="border-left: 2px solid gray;"
+                                                        src="../assets/img/Flag_By_Post/{{post[0].ToCountry}}.jpg"
+                                                        alt="Image Alternative text"
+                                                        title="Image Title" /><br>
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-6">
+                                                <p class="theme-search-results-item-category">
+                                                    {{post[0].PostType}} post # <strong>{{post[0].PostNumber}}</strong></p>
+                                                <h5
+                                                    class="theme-search-results-item-title _fw-b _mb-20 _fs theme-search-results-item-title-lg">
+                                                    <span *ngIf="post[0].PostType == 'Traveller'">I am
+                                                        travelling</span><span
+                                                        *ngIf="post[0].PostType != 'Traveller'">Is anyone
+                                                        coming</span> from <strong
+                                                        style="color:#ff6c2d">{{post[0].FromCity}}</strong>
+                                                    to <strong
+                                                        style="color:#ff6c2d">{{post[0].ToCity}}</strong>
+                                                </h5>
+                                                <div class="theme-search-results-item-rating">
+                                                    <ul class="theme-search-results-item-rating-stars">
+                                                        <li class="active">
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li class="active">
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-star"></i>
+                                                        </li>
+                                                    </ul>
+                                                    <p class="theme-search-results-item-rating-title">82
+                                                        reviews</p>
+                                                </div>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-clock-o"></i> Travel Date:
+                                                    {{datepipe.transform(post[0].TravelDate, 'dd/MMM/yyyy')}}
+                                                </p>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-shopping-bag"></i> Space Available:
+                                                    {{ post[0].SpaceAvailable}} KG
+                                                </p>
+                                                <p class="theme-search-results-item-time"
+                                                    *ngIf="post[0].PostType == 'Traveller'">
+                                                    <i class="fa fa-user"></i> Posted By:
+                                                    {{ post[0].Author[0].FirstName +' '+ post[0].Author[0].LastName}}
+                                                    <button (click)="toggleShareIt()" style="color: #ff6c2d;
+                                                    background: transparent;
+                                                    font-weight: 700;
+                                                    height: 25px;
+                                                    padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
+                                                </p>
+                                                      <!-- Add To Any Button Goes here -->
+                                                        
+                                                    <ng-container *ngIf="showShareIt">
+                                                    <div>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/twitter?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:royalblue"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/facebook_messenger.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/wechat?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/wechat.svg" width="32" height="32" style="background-color:#7bb32e"></a>
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/email?linkurl=https://www.carrycog.com/postdetails/{{post[0].PostsID}}&amp;linkname=" target="_blank">
+                                                            <img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:#0166ff"></a>
+                                                        </div>
+                                                    </ng-container>
+
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <div class="theme-search-results-item-book">
+                                                    <div class="theme-search-results-item-price"
+                                                        *ngIf="post[0].PostType == 'Traveller'">
+                                                        <p class="theme-search-results-item-price-sign">
+                                                            {{post[0].CountryCodeValue}}</p>
+                                                        <p class="theme-search-results-item-price-tag">
+                                                            {{post[0].Cost}}/KG</p>
+                                                    </div>
+                                                    <div *ngIf="getCurrentUser() != post[0].Author[0].Id; else elseBlockOnRequestButton">
+                                                        <div *ngIf="checkRequestSent(post[0].PostsID)
+                                            then requestSent;
+                                            else NewRequest
+                                            "></div>
+                                                        <ng-template #requestSent>
+                                                            <a style="color: red;width: 90px;background-color: transparent;"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span style="color:red;">Request
+                                                                    Sent</span>
+
+                                                            </a>
+                                                        </ng-template>
+                                                        <ng-template #NewRequest>
+                                                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
+                                                                (click)="onRequest(post[0].PostsID)">
+
+                                                                <span
+                                                                    *ngIf="post[0].PostType == 'Traveller'">Request</span>
+                                                                <span
+                                                                    *ngIf="post[0].PostType != 'Traveller'">Offer</span></a>
+                                                        </ng-template>
+                                                    </div>
+                                                    <ng-template #elseBlockOnRequestButton>
+                                                        <a style="color: gray;width: 90px;background-color: transparent;" href="/inbox"
+                                                                class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn">
+
+                                                                <span>See Requests</span>
+
+                                                            </a>
+                                                    </ng-template>
+                                                </div>
+                                                <hr>
+                                                <h4><strong>Details:</strong></h4> {{post[0].Details}}
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="collapse theme-search-results-item-collapse"
+                                        id="searchResultsItem-{{post[0].PostsID}}">
+                                        <div class="theme-search-results-item-extend">
+                                            <a class="theme-search-results-item-extend-close"
+                                                href="#searchResultsItem-{{post[0].PostsID}}" role="button"
+                                                data-toggle="collapse" attr.aria-expanded="false"
+                                                attr.aria-controls="searchResultsItem-{{post[0].PostsID}}">&#10005;</a>
+                                            <div class="tabbable theme-search-results-item-tabs">
+                                                <ul class="nav nav-tabs" role="tablist">
+                                                    <li class="active" role="presentation">
+                                                        <a role="tab" data-toggle="tab"
+                                                            href="#tab-item--1"
+                                                            attr.aria-controls="tab-item--1">Details</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" role="tabpanel"
+                                                        id="tab-item--1">
+                                                        <p
+                                                            class="theme-search-results-item-tabs-details-desc">
+                                                            {{post[0].Details}}.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mobile Listing Ends From here -->
+                       
+
+                       
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-2-5">
+                <div class="sticky-col _mob-h">
+                    <div class="theme-ad _mb-20 theme-ad-dark">
+                        <a class="theme-ad-link" href="#"></a>
+                        <p class="theme-ad-sign">Advertisement</p>
+                        <img class="theme-ad-img" src="../assets/img/300x600.png" alt="Image Alternative text"
+                            title="Image Title" />
+                    </div>
+                    <div class="theme-ad theme-ad-dark">
+                        <a class="theme-ad-link" href="#"></a>
+                        <p class="theme-ad-sign">Advertisement</p>
+                        <img class="theme-ad-img" src="../assets/img/300x500.png" alt="Image Alternative text"
+                            title="Image Title" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

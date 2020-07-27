@@ -19,23 +19,31 @@ export class HeaderComponent implements OnInit {
   angularVersion: string;
   navbarCollapsed = true;
   navbarDropDown = true;
-  constructor(private router:Router,private _headerService:RefreshHeaderService) { 
+  CountryName;
+  constructor(private _homeService:HomeService , private router:Router,private _headerService:RefreshHeaderService) { 
 
   }
-
-
-
   token: boolean = false;
   ngOnInit(): void {
+    this.getCountryLocation();
     if (this._headerService.subsVar==undefined) {    
       this._headerService.subsVar = this._headerService.    
       RefreshHeader.subscribe((name:string) => {    
         this.RefreshNavBar();    
       });    
     } 
-    
-  
     this.RefreshNavBar();
+  }
+  getCountryLocation(){
+    this._homeService.getCountryLocation().subscribe(
+      (res: any) => {
+        this.CountryName = res.country_flag; 
+        localStorage.setItem('offSet',res.time_zone.offset);
+      },
+      err => {
+          console.log(err.message);
+      }
+    );
   }
   toggleIsCollapse(){
     if(this.isCollapsed)
@@ -51,7 +59,7 @@ export class HeaderComponent implements OnInit {
     else
     this.token = false;
   }
-
+  
   onLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');

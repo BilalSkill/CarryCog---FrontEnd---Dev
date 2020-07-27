@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../shared/home.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScriptService } from '../shared/script.service';
-
+import { Title, Meta } from '@angular/platform-browser';
 import { RefreshHeaderService } from '../shared/refresh-header.service';
 
 @Component({
@@ -19,13 +19,22 @@ export class CreatepostComponent implements OnInit {
   
   fromCityBool:boolean = true;
   toCityBool:boolean = true;
+  toCitySameBool:boolean = true;
+  TravelError:string = "Travel Date is Required";
+  displayTravelError:boolean = false;
+  CostError:string = "Cost is Required";
+  displayCostError:boolean = true;
+  SpaceError:string = "Space Available is Required";
+  displaySpaceError:boolean = true;
+  formType:string = "Traveller";
   readonly myCutomRegex = '^[^,\n]*((,[^,\n]*){2}$)';
   today: Date;
   maxDate: Date;
   minDate: Date;
   Currencies;
   loadAPI: Promise<any>;
-  constructor(private _scriptLoader:ScriptService,private _headerService:RefreshHeaderService, public _homeService:HomeService,private toastr:ToastrService, private router:Router) { 
+  title = 'CarryCog - Create Post';
+  constructor(private titleService: Title, private metaService: Meta,private _scriptLoader:ScriptService,private _headerService:RefreshHeaderService, public _homeService:HomeService,private toastr:ToastrService, private router:Router) { 
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
       resolve(true);
@@ -35,6 +44,14 @@ export class CreatepostComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+    this.titleService.setTitle(this.title);
+    this.metaService.addTags([
+      {name: 'keywords', content: 'CarryCog, Logistics, Delivery, Travelling, Carrying, Parsel'},
+      {name: 'description', content: 'Cargo takes more than 30 days to deliver while the epxress delivery charges way more money keeping this is mind we have developed this free solution which saves both time and money'},
+      {name: 'robots', content: 'home, aboutus'}
+    ]);
+
     if(localStorage.getItem('token')  != null){
     this._homeService.CreatePostModel.reset();
     this.getListOfCurrencies();
@@ -60,6 +77,48 @@ export class CreatepostComponent implements OnInit {
     );
   }
 
+  isFormValid():boolean{
+    if(this.fromCityBool == true && this.toCityBool == true && this.toCitySameBool == true){
+      this.formType = this._homeService.CreatePostModel.get('PostType').value;
+    const TravelDate = this._homeService.CreatePostModel.get('TravelDate').value;
+    const Cost = this._homeService.CreatePostModel.get('Cost').value;
+    const SpaceAvailable = this._homeService.CreatePostModel.get('SpaceAvailable').value;
+    switch(this.formType) {  
+      case "Traveller": { 
+        if(TravelDate == ''){
+          this.displayTravelError = true;
+          console.log("Chacking For TravelDate Validations.");
+          return false;
+        }
+        else if(Cost == ''){
+          console.log("Chacking For Cost Validations.");
+          return false;
+        }
+        else if(SpaceAvailable == ''){
+          console.log("Chacking For SpaceAvailable Validations.");
+          return false;
+        }else{
+          return true;
+        } 
+         break;
+      }
+      case "Requester": { 
+        if(SpaceAvailable == ''){
+          console.log("Chacking For SpaceAvailable Validations.");
+          return false;
+        }
+        else{
+          return true;
+        }
+         break;
+      }      
+   }   
+      //return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   public loadScript() {        
     var isFound = false;
@@ -116,15 +175,23 @@ ToCityChange(toCity: string){
   
 if(this.toCity != ''){
   if(!this.toCity.match('^[^,\n]*((,[^,\n]*){2}$)')){
+    
     this.toCityBool = false;
     }  
     else{
+      if(this.toCity == this.fromCity){
+        this.toCitySameBool = false;
+      }
+      else{
+        this.toCitySameBool = true;
+      }
       this.toCityBool = true;
     }
   }
     
 }
   onSubmit() {
+    if(this.isFormValid){
     this.submitted = true;
     console.log(this.formType);
     var result =this._homeService.createPost(this.fromCity,this.toCity);
@@ -146,28 +213,39 @@ if(this.toCity != ''){
           this._headerService.onRefreshHeader();
           }
           else{
-            this.toastr.error(res.errors, 'Error');
-          console.log(res.errors);
+            this.toastr.error("Please fill all fields.","Incomplete Form!");
           }
         }
       },
       err => {       
-        console.log(err.error);
-        this.toastr.error(err.error.errors, 'Error');
+        this.toastr.error("Please fill all fields.","Incomplete Form!");
       }
     );
+    }else{
+      this.toastr.error("Please fill all fields.","Incomplete Form!");
+    }
   }
 
-  formType:string = "Traveller";
+  
   updateForm(){
     this.formType = this._homeService.CreatePostModel.get('PostType').value;
+    // const TravelDate = this._homeService.CreatePostModel.get('TravelDate');
+     const Cost = this._homeService.CreatePostModel.get('Cost');
+     //const SpaceAvailable = this._homeService.CreatePostModel.get('SpaceAvailable');
     switch(this.formType) {  
       case "Traveller": { 
-        console.log('Form changed to Traveller')
+        // TravelDate.setValidators(Validators.required);
+        // Cost.setValidators(Validators.required);
+        // SpaceAvailable.setValidators(Validators.required);
+        // console.log("Validators Updated.");
          break;
       }
       case "Requester": { 
-        console.log('Form changed to Requester')
+        
+        // TravelDate.setValidators(null);
+         Cost.setValidators(null);
+        // SpaceAvailable.setValidators(Validators.required);
+        // console.log("Validation Removed.");
          break;
       }      
    }

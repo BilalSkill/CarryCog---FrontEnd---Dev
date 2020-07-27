@@ -28,6 +28,15 @@ import { UpdatepostComponent } from './updatepost/updatepost.component';
 import { DatePipe } from '@angular/common';
 import { ActivateuserComponent } from './activateuser/activateuser.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { InboxComponent } from './inbox/inbox.component';
+import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { ContactusComponent } from './contactus/contactus.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { FaqComponent } from './faq/faq.component';
+import { HowitworksComponent } from './howitworks/howitworks.component';
+import { TermsofuseComponent } from './termsofuse/termsofuse.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { NumberDirective } from './numbers-only.directive';
 
 @NgModule({
   declarations: [
@@ -45,7 +54,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CreatepostComponent,
     MypostsComponent,
     UpdatepostComponent,
-    ActivateuserComponent
+    ActivateuserComponent,
+    InboxComponent,
+    ContactusComponent,
+    AboutusComponent,
+    FaqComponent,
+    HowitworksComponent,
+    TermsofuseComponent,
+    PostDetailsComponent,
+    NumberDirective
   ],
   imports: [
     BrowserModule,
@@ -60,6 +77,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
      }),
     FormsModule,
     NgbModule,
+    CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot()
   ],
   providers: [UserService, {

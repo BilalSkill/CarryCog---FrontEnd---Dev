@@ -24,7 +24,7 @@
                   </div>
                   <div class="form-group theme-login-form-group">
                     <div class="theme-search-area-section-inner">
-                        <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                        <i style="line-height:3" class="theme-search-area-section-icon lin lin-location-pin"></i>
                         <input class="theme-search-area-section-input typeahead" name="FromCity" type="text" placeholder="From" data-provide="typeahead" #FromCity formControlName="FromCity"  (blur)="fromCityChange($event.target.value)"   /> <!--(ngModelChange)="(FromCity.value)"-->
                       <div *ngIf="submitted && _homeService.EditPostModel.get('FromCity').errors?.required" class="invalid-feedback">
                           <div *ngIf="_homeService.EditPostModel.get('FromCity').errors.required"><label class="text-danger">From City is required</label></div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group theme-login-form-group">
                     <div class="theme-search-area-section-inner">
-                        <i class="theme-search-area-section-icon lin lin-location-pin"></i>
+                        <i style="line-height:3" class="theme-search-area-section-icon lin lin-location-pin"></i>
                         <input class="theme-search-area-section-input typeahead"  name="ToCity"  type="text" placeholder="To" data-provide="typeahead" formControlName="ToCity" (blur)="ToCityChange($event.target.value)"/>
                         <div *ngIf="submitted && _homeService.EditPostModel.get('ToCity').errors?.required" class="invalid-feedback">
                           <div *ngIf="_homeService.EditPostModel.get('ToCity').errors.required"><label class="text-danger">To City is required</label></div>
@@ -53,22 +53,25 @@
                   <div class="form-group theme-login-form-group" *ngIf="this.formType=='Traveller'">
                     <div class="row">
                       <div class="col-md-6">
-                        <select class="form-control" formControlName="Currency">
+                         <select class="form-control" formControlName="CountryCode">
                           <option [ngValue]="null" disabled>Currency</option>
                           <option *ngFor="let currency of Currencies" [ngValue]="currency.CurrencySymbolsId">
                           {{ currency.CountryCode }}
                           </option>
-                        </select><br>
+                        </select> 
+                        <br>
                       </div>
                       <div class="col-md-6">
-                        <input class="form-control" type="number" placeholder="Cost / KG" formControlName="Cost" autocomplete="false" />
+                        <input class="form-control" type="text"  placeholder="Cost / KG" formControlName="Cost" autocomplete="false"  numbersOnly/>
+                        
                       </div>
                     </div>
                     
                                           
                   </div>
                   <div class="form-group theme-login-form-group">
-                    <input class="form-control" type="number" placeholder="{{this.formType == 'Traveller' ? 'Space Available (KG)' : 'Space Required (KG)'}}" formControlName="SpaceAvailable" autocomplete="false" />                       
+                    <input class="form-control" type="text"  placeholder="{{this.formType == 'Traveller' ? 'Space Available (KG)' : 'Space Required (KG)'}}" formControlName="SpaceAvailable" autocomplete="false" numbersOnly/>                       
+                    
                   </div>
                   <div class="form-group theme-login-form-group">
                     <textarea class="form-control" rows="10" style="height: 100px;" type="text" placeholder="Details..." formControlName="Details"></textarea>                       

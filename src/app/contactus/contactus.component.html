@@ -1,0 +1,74 @@
+  <div class="theme-hero-area _h-50vh _h-mob-80vh theme-hero-area-sm">
+         <div class="theme-hero-area-bg-wrap">
+          <div class="theme-hero-area-bg" style="background-image:url(../assets/img/Slider2.jpg);" id="hero-banner"></div>
+        <div class="theme-hero-area-mask theme-hero-area-mask-strong"></div>
+        </div> 
+         <div class="theme-hero-area-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 col-md-offset-2 theme-page-header-abs">
+                <div class="theme-page-header theme-page-header-lg">
+                  <h1 class="theme-page-header-title">CarryCog</h1>
+                  <div class="theme-contact-info">
+                    <div class="row row-no-gutter">
+                      <div class="col-md-4">
+                        <ul class="theme-contact-info-list">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-envelope"></i>info@CarryCog.com
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      <div class="theme-page-section theme-page-section-xl theme-page-section-gray" style="padding-bottom:0px">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+              <div class="theme-contact">
+                <h2 class="theme-contact-title">Contact Us</h2>
+                <form [formGroup]="_contactService.InsertContactUsRecord" autocomplete="off" (submit)="onSubmit()">
+                <div class="row row-col-mob-gap">
+                  <div class="col-md-7">
+                    <div class="form-group theme-login-form-group">
+                      <input class="form-control" type="text" placeholder="Name" formControlName="Name" autocomplete="false" />                       
+                      <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('Name').touched && _contactService.InsertContactUsRecord.get('Name').errors?.required">Name is mandatory.</label>
+                        <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('Name').touched && _contactService.InsertContactUsRecord.get('Name').errors?.minlength">Minimum 3 characters required.</label>
+                     
+                    </div>
+                    <div class="form-group theme-login-form-group">
+                      <input class="form-control" type="email" placeholder="Email" formControlName="Email" autocomplete="false" />
+                      <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('Email').touched && _contactService.InsertContactUsRecord.get('Email').errors?.email">Invalid email address.</label>
+                    </div>
+                    <div class="form-group theme-login-form-group">
+                      <input class="form-control" type="number" placeholder="Contact Number" formControlName="ContactNumber" autocomplete="false" />
+                      
+                      <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('ContactNumber').touched && _contactService.InsertContactUsRecord.get('ContactNumber').errors?.required">Contact Number is mandatory.</label>
+                        <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('ContactNumber').touched && _contactService.InsertContactUsRecord.get('ContactNumber').errors?.minlength">Minimum 10 characters required.</label>
+                    </div>
+                    <div class="form-group theme-login-form-group">
+                      <textarea class="form-control" rows="10" style="height: 100px;" type="text" placeholder="Message..." formControlName="Message"></textarea>                       
+                      <label class="text-danger" *ngIf="_contactService.InsertContactUsRecord.get('Message').touched && _contactService.InsertContactUsRecord.get('Message').errors?.required">Message is mandatory.</label>
+                    </div>
+                    <button type="submit" class="btn btn-uc btn-dark btn-block btn-lg" >Send Message</button>
+                    <br>
+                  </div>
+                  <!--<div class="col-md-5">
+                    <div class="google-map theme-contact-map" data-lat="40.7483624" data-lng="-73.9900896" data-tab="false"></div>
+                  </div>-->
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+     

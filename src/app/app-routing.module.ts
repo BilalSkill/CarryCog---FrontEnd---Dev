@@ -12,6 +12,13 @@ import { CreatepostComponent } from './createpost/createpost.component';
 import { MypostsComponent } from './myposts/myposts.component';
 import { UpdatepostComponent } from './updatepost/updatepost.component';
 import { ActivateuserComponent } from './activateuser/activateuser.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { HowitworksComponent } from './howitworks/howitworks.component';
+import { TermsofuseComponent } from './termsofuse/termsofuse.component';
+import { FaqComponent } from './faq/faq.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 const routes: Routes = [
@@ -25,8 +32,14 @@ const routes: Routes = [
   {path:'registration', component: RegistrationComponent},
   {path:'myposts',component: MypostsComponent},
   {path:'updatepost', component: UpdatepostComponent},
-  {path:'activateuser/:Email',component: ActivateuserComponent}
-  
+  {path:'activateuser/:Email',component: ActivateuserComponent},
+  {path:'inbox',component:InboxComponent},
+  {path:'contact',component:ContactusComponent},
+  {path:'about',component:AboutusComponent},
+  {path:'howitworks',component:HowitworksComponent},
+  {path:'termsofuse',component:TermsofuseComponent},
+  {path:'faq',component:FaqComponent},
+  {path:'postdetails/:ID', component: PostDetailsComponent},
 ];
 
 @NgModule({

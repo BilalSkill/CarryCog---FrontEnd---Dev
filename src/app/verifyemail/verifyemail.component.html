@@ -15,7 +15,7 @@
                         <input class="form-control" type="text" placeholder="Email Address" formControlName="Email" autocomplete="false" />
                         <label class="text-danger" *ngIf="service.emailModel.get('Email').touched && service.emailModel.get('Email').errors?.email">Invalid email address.</label>
                       </div>                
-                    <button type="submit" class="btn btn-uc btn-dark btn-block btn-lg" [disabled]="!service.emailModel.valid">Change Password</button>
+                    <button type="submit" class="btn btn-uc btn-dark btn-block btn-lg" [disabled]="!service.emailModel.valid">Verify Email</button>
                     <br>
                    </form>
               </div>

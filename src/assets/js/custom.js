@@ -320,32 +320,33 @@ function heroSearchSections() {
     });
 }
 
-function autocomplete() {
-    $('.typeahead').typeahead({
-        minLength: 3,
-        showHintOnFocus: true,
-        source: function(q, cb) {
-            return $.ajax({
-                dataType: 'jsonp',
-                type: 'get',
-                url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,
-                chache: false,
-                success: function(data) {
-                    var res = [];
-                    $.each(data, function(index, val){
-                        if(val !== "%s") {
-                            res.push({
-                                id: index,
-                                name: val
-                            })
-                        }
-                    })
-                    cb(res);
-                }
-            })
-        }
-    })
-}
+                            function autocomplete() {
+                                $('.typeahead').typeahead({
+                                    minLength: 3,
+                                    showHintOnFocus: true,
+                                    source: function(q, cb) {
+                                        return $.ajax({
+                                            dataType: 'jsonp',
+                                            type: 'get',
+                                            //url: 'https://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,
+                                            url: 'https://secure.geobytes.com/AutoCompleteCity?key=7c756203dbb38590a66e01a5a3e1ad96&callback=?&q='+q,
+                                            chache: false,
+                                            success: function(data) {
+                                                var res = [];
+                                                $.each(data, function(index, val){
+                                                    if(val !== "%s") {
+                                                        res.push({
+                                                            id: index,
+                                                            name: val
+                                                        })
+                                                    }
+                                                })
+                                                cb(res);
+                                            }
+                                        })
+                                    }
+                                })
+                            }
 
 
 function searchResultsCollapse() {

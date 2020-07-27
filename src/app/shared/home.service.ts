@@ -16,13 +16,14 @@ export class HomeService {
   constructor(private fb: FormBuilder, private http: HttpClient, private userInfo:UserService) { }
   readonly BaseURI = environment.baseUrl;
   readonly myCutomRegex = '^[^,\n]*((,[^,\n]*){2}$)';
-
+  readonly CustomRegexForInteger = '^[0-9]+$';
+CurrencyValueFromPost; //Because I am unable to read value from reactive form using this variable for that...!
   CreatePostModel = this.fb.group({    
-    FromCity: ['', { validators: [Validators.required,Validators.pattern(this.myCutomRegex)], updateOn: "blur" }],
-    ToCity: ['', { validators: [Validators.required,Validators.pattern(this.myCutomRegex)], updateOn: "blur" }],
-    TravelDate: [''],
-    Cost: [''],
-    SpaceAvailable: [''],
+    FromCity: ['', { validators: [Validators.required], updateOn: "blur" }],
+    ToCity: ['', { validators: [Validators.required], updateOn: "blur" }],
+    TravelDate: [''],//, { validators:[Validators.required]}],
+    Cost: ['',Validators.pattern(this.CustomRegexForInteger)],//,{ validators:[Validators.required]}],
+    SpaceAvailable: ['',Validators.pattern(this.CustomRegexForInteger)],//,{ validators:[Validators.required]}],
     Details: [''],
     PostType: [''],
     Currency: ['']
@@ -38,8 +39,7 @@ export class HomeService {
     SpaceAvailable: [''],
     Details: [''],
     PostType: [''],
-    Currency: [''],
-    CurrencySymbolsId:[''],
+    CountryCode: [''],
     UserID:[''],
     FromCountry:[''],
     ToCountry:['']
@@ -47,10 +47,13 @@ export class HomeService {
 
   ListOfCities;
 
-  getAllPosts() {
-    return this.http.get(this.BaseURI+'/posts');
+  getAllPosts(countryName:string) {
+    console.log("Country Name at the time of API calling: "+countryName);
+    return this.http.get(this.BaseURI+'/posts/getAllPosts/'+countryName);
   }
- 
+  getPost(postID:string){
+    return this.http.get(this.BaseURI+'/posts/'+postID);
+  }
   getAllPostsForUser(userID:string) {
     return this.http.get(this.BaseURI+'/posts/getallpostforuser/'+userID);
   }
@@ -71,7 +74,7 @@ export class HomeService {
     SpaceAvailable: this.CreatePostModel.value.SpaceAvailable,
     Details: this.CreatePostModel.value.Details,        
     PostType: this.CreatePostModel.value.PostType,
-    CurrencySymbols: this.CreatePostModel.value.Currency
+    CurrencySymbols: this.CreatePostModel.value.PostType == "Traveller" ? this.CreatePostModel.value.Currency : '74',
     }
     var userID = localStorage.getItem('userID');
     return this.http.post(this.BaseURI+'/posts/createpost/'+userID,body);
@@ -88,7 +91,7 @@ export class HomeService {
     SpaceAvailable: this.EditPostModel.value.SpaceAvailable,
     Details: this.EditPostModel.value.Details,        
     PostType: this.EditPostModel.value.PostType,
-    CurrencySymbols: this.EditPostModel.value.Currency
+    CurrencySymbols: this.EditPostModel.value.CountryCode
     }
     var postID = body.postID;
     return this.http.put(this.BaseURI+'/posts/update/'+postID,body);
@@ -98,6 +101,13 @@ export class HomeService {
     var body = formData;
     var userID = localStorage.getItem('userID');
     return this.http.post(this.BaseURI+'/posts/createpost/'+userID,body);
+  }
+  loadpostsWithOutCountryFilter(){
+    return this.http.get(this.BaseURI+'/posts');
+  }
+  getCountryLocation(){
+    var result = this.http.get('https://api.ipgeolocation.io/ipgeo?apiKey=4eb1910dcfe64653a7eea08c79d1cd0c');
+    return result;
   }
 
   searchPosts(FromCity:string,ToCity:string,PostType:string){
@@ -118,14 +128,13 @@ export class HomeService {
     message = 'Hey, I am interested in your post, that you are looking for someone coming from '+post.FromCity+' to '+post.ToCity+'. I have free space please reply back. Thanks';
 
     var body = {
-      FromMessage: 1,
+      FromMessage: localStorage.getItem('userID'),
       ToMessage: post.UserID,
       Message: message
     };
-   // return this.http.post(this.BaseURI+'/Inbox/requestpost/'+post.Id);
-   //if(post.PostType == "Traveller")
-   console.log(body);
-
+    console.log(body);
+   return this.http.post(this.BaseURI+'/Inbox/requestpost/'+post.PostsID,body);
+   
   }
   getListOfCurrencies(){
     return this.http.get(this.BaseURI+'/posts/getcurrencies');
