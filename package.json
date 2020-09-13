@@ -28,7 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "angularx-social-login": "^3.2.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "jquery": "^3.5.1",
     "jw-angular-social-buttons": "^1.0.0",
     "mdbootstrap": "^4.18.0",
