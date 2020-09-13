@@ -48,8 +48,7 @@ CurrencyValueFromPost; //Because I am unable to read value from reactive form us
   ListOfCities;
 
   getAllPosts(countryName:string) {
-    console.log("Country Name at the time of API calling: "+countryName);
-    return this.http.get(this.BaseURI+'/posts/getAllPosts/'+countryName);
+     return this.http.get(this.BaseURI+'/posts/getAllPosts/'+countryName);
   }
   getPost(postID:string){
     return this.http.get(this.BaseURI+'/posts/'+postID);
@@ -65,7 +64,6 @@ CurrencyValueFromPost; //Because I am unable to read value from reactive form us
   }
 
   createPost(FromCity:string,ToCity:string){   
-    console.log(this.CreatePostModel.value);
     var body={
     FromCity: FromCity,
     ToCity: ToCity,
@@ -132,7 +130,6 @@ CurrencyValueFromPost; //Because I am unable to read value from reactive form us
       ToMessage: post.UserID,
       Message: message
     };
-    console.log(body);
    return this.http.post(this.BaseURI+'/Inbox/requestpost/'+post.PostsID,body);
    
   }

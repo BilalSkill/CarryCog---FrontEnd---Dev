@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HomeService } from '../shared/home.service';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd } from '@angular/router';
 import { ToastRef, ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 
+// declare ga as a function to access the JS code in TS
+declare let gtag: Function;
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,7 @@ import { Title, Meta } from '@angular/platform-browser';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  url = 'http://jasonwatmore.com';
-    text = `Jason Watmore's Blog | A Web Developer in Sydney`;
-    imageUrl = 'http://jasonwatmore.com/_content/images/jason.jpg';
-
-  submitted = false;
+    submitted = false;
   fromCity:string;
   toCity:string;
   fromCountry:string;
@@ -29,6 +27,7 @@ export class HomeComponent implements OnInit {
   limitedPosts;
   public showShareIt:boolean = false;
   public buttonName:any = 'Share Post';
+  KGorCostValue:string = '';
   postResults;
   CountryName;
   SearchOptions: string[] = ['Search For', 'Traveler (Carrier)', 'Requester'];
@@ -36,11 +35,21 @@ export class HomeComponent implements OnInit {
   isCollapsed = true;
   loadAPI: Promise<any>;
   title = 'CarryCog - Home';
+
+
   readonly myCutomRegex = '^[^,\n]*((,[^,\n]*){2}$)';
   constructor(private titleService: Title, private metaService: Meta,private fb: FormBuilder, private router:Router,private toastr:ToastrService, public _homeService:HomeService, public datepipe: DatePipe) {
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
       resolve(true);
+  });
+
+  this.router.events.subscribe(event => {
+
+    if (event instanceof NavigationEnd) {
+      gtag('set', 'page', event.urlAfterRedirects);
+      gtag('send', 'pageview');
+    }
   });
 
   this.SearchPostsModel.controls['PostType'].setValue(this.default, {onlySelf: true});
@@ -56,18 +65,18 @@ export class HomeComponent implements OnInit {
     // ]);
 
     this.metaService.addTags([
-      {name: 'og:title', content:'CarryCog - Home'},
-      {name: 'og:image', content:'https://carrycog.com/assets/img/Flag_By_Post/pakistan.jpg'},
+      {property: 'og:title', content:'CarryCog - Home'},
+      {property: 'og:description', content:'CarryCog is an online place where people can connect with travellers from any part of the world going to or coming from a city of your desire to send and receive packages by simply posting on CarryCog.com'},
+      {property:'og:site_name', content:'CarryCog Logistic Site'},
+      {property: 'og:type', content:'website'}
     ]);
 
     this._homeService.getCountryLocation().subscribe(
       (res: any) => {
         this.CountryName = res.country_name; 
-        console.log("Country Name from On Init: " + this.CountryName);
         this.loadposts(this.CountryName);
       },
       err => {
-          console.log(err.message);
           this.loadpostsWithOutCountryFilter();
       }
     );
@@ -75,7 +84,6 @@ export class HomeComponent implements OnInit {
   }
   public loadScript() {        
     var isFound = false;
-    console.log('inside load script function');
     var scripts = document.getElementsByTagName("script")
     for (var i = 0; i < scripts.length; ++i) {
         if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
@@ -127,18 +135,13 @@ fromCityChange(fromCity: string){
  
 }
 ToCityChange(toCity: string){
-  console.log(toCity);
 this.toCity = toCity;
 if(this.toCity != ''){
 if(!this.toCity.match('^[^,\n]*((,[^,\n]*){2}$)')){
   this.toCityBool = false;
-  console.log('In if statement of toCity: '+this.toCityBool);
-  console.log(this.toCity);
   }
   else{
     this.toCityBool = true;
-    console.log('In Else statement of toCity: '+this.toCityBool);
-    console.log(this.toCity);
   }
 }  
 }
@@ -151,8 +154,6 @@ loadpostsWithOutCountryFilter(): void{
   this._homeService.loadpostsWithOutCountryFilter().subscribe(
     (res: any) => {
        if (res.succeeded == 'True') {
-         
-         console.log(res.data);
          this.postResults = res.data;  
                 
       } else {
@@ -174,28 +175,21 @@ loadpostsWithOutCountryFilter(): void{
 
 }
   loadposts(countryName:string): void{    
-    console.log("Country Name From Load Posts is: "+countryName);
     this._homeService.getAllPosts(countryName).subscribe(
       (res: any) => {
          if (res.succeeded == 'True') {
-           
-           console.log(res.data);
            this.postResults = res.data;  
-                  
-        } else {
-          console.log(res.errors);
-         // this.postResults = res.data;
-         // this.toastr.error(res.errors, 'No Record Found!');
+        } else {              
+         this.toastr.error(res.errors, 'No Record Found!');
         }
       },
       err => {
-        // if(err.message.includes('Http failure')){
-        //   this.toastr.error("Server not available",'Error');
-        // }
-        // else{
-          console.log(err.message);
-        // this.toastr.error(err.message, 'Error');
-        // }
+        if(err.message.includes('Http failure')){
+           this.toastr.error("Server not available",'Error');
+         }
+         else{
+         this.toastr.error(err.message, 'Error');
+         }
       }
     );
 
@@ -214,14 +208,12 @@ loadpostsWithOutCountryFilter(): void{
     this.SearchPostsModel.value.FromCity = this.fromCity;
     this.SearchPostsModel.value.ToCity = this.toCity;
     this.postType = this.SearchPostsModel.value.PostType;
-    console.log(this.SearchPostsModel);
     if(this.toCity.match('^[^,\n]*((,[^,\n]*){2}$)') && this.fromCity.match('^[^,\n]*((,[^,\n]*){2}$)') && this.postType != ''){
      this._homeService.searchPosts(this.fromCity,this.toCity,this.postType).subscribe(
       (res: any) => {
          if (res.succeeded == 'True') {
            this.postResults = res.data;          
         } else {
-          console.log(res.errors);
           this.postResults = res.data;
           this.toastr.error(res.errors, 'No Record Found!');
         }
@@ -279,12 +271,10 @@ loadpostsWithOutCountryFilter(): void{
        }
        else{
          this.toastr.error(res.errors, 'Error');
-       console.log(res.errors);
        }
      }
    },
    err => {       
-     console.log(err.error);
      this.toastr.error(err.error.errors, 'Error');
    }
  );

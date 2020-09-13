@@ -36,6 +36,7 @@ export class InboxComponent implements OnInit {
   currDiv: string;
   currUserMessages;
   title = 'CarryCog - Inbox';
+  isCollapsed = false;
     //  isShown: string = ; // hidden by default 
   constructor(private titleService: Title, private metaService: Meta,public _inboxService:InboxService,private router:Router,private toastr:ToastrService, public datepipe: DatePipe) { }
 
@@ -49,6 +50,7 @@ export class InboxComponent implements OnInit {
     ]);
 
    this.loadMyPostsRequests();
+   this.prevMessagesCount = 0;
   }
   ngOnDestroy() {
     if (this.MessagesIntervalTimer) {
@@ -56,45 +58,14 @@ export class InboxComponent implements OnInit {
     }
   }
   loadpostsUserList(postID: string){
-    console.log('div to hide is '+postID);
     this.currDiv = postID;
   }
-  // loadpostsUserList(): void{
-  //   var result =this._inboxService.getallforuser(localStorage.getItem('userID'));
-  //   result.subscribe(
-  //     (res: any) => {
-  //        if (res.succeeded) {
-  //          console.log(res.data);
-  //          this.postsUsersList = res.data;
-  //       } else {
-          
-  //         if(res.error != ''){
-  //         this.toastr.error(res.error_description,res.error);
-          
-  //         localStorage.removeItem('token');
-  //         localStorage.removeItem('userName');
-  //         localStorage.removeItem('userID');
-  //         this.router.navigate(['/login']);
-  //         }
-  //         else{
-  //           this.toastr.error(res.errors, 'Error');
-  //         console.log(res.errors);
-  //         }
-  //       }
-  //     },
-  //     err => {       
-  //       console.log(err.error);
-  //       this.toastr.error(err.error.errors, 'Error');
-  //     }
-  //   );
-  // }
-  
+   
   loadMyPostsRequests(): void{
     var result =this._inboxService.getallforuser(localStorage.getItem('userID'));
     result.subscribe(
       (res: any) => {
          if (res.succeeded) {
-           console.log(res.data);
            this.postsList = res.data;
         } else {
           
@@ -108,37 +79,44 @@ export class InboxComponent implements OnInit {
           }
           else{
             this.toastr.error(res.errors, 'Error');
-          console.log(res.errors);
           }
         }
       },
       err => {       
-        console.log(err.error);
         this.toastr.error(err.error.errors, 'Error');
       }
     );
   }
   getMessagesAndScrollDown(userId:string){   
-    console.log("Get Messages And ScrollDown...");
-    this.prevMessagesCount = null; 
-    this.getUserMessages(userId);
-    if(this.MessagesIntervalTimer != null)
-    {
-      clearInterval(this.MessagesIntervalTimer);
-    }
+    //this.getUserMessages(userId);
+     if(this.MessagesIntervalTimer != null)
+     {
+       clearInterval(this.MessagesIntervalTimer);
+     }
     this.MessagesIntervalTimer = setInterval(() => {
       
-      console.log("Previous Messages From last request "+this.prevMessagesCount);
-      console.log("Current List Of Messages Count "+this.messages.length);
-      if(this.prevMessagesCount < this.messages.length){
-      this.getUserMessagesForBackground(userId);
+        
+     //  if(this.prevMessagesCount == null){
+     //    console.log('Timer ticked in if condition');
+     // }
+    //  if(this.messages != null){
+    //    if(this.prevMessagesCount != this.messages.length){
+    //      console.log('Scrolling....');       
+    //    this.scrollToBottom();
+    //  }
+    // }else{
+    //   console.log('Scrolling....');       
+    //    this.scrollToBottom();
+    // }
+     this.getUserMessages(userId);
+     if(this.prevMessagesCount != this.messages.length){
       this.scrollToBottom();
+      this.prevMessagesCount = this.messages.length;
     }
     }, 500);
-    
+    this.isCollapsed = true;
   }
   getUserMessagesForBackground(userId:String){
-    console.log("Get User Messages For Background...");
     
     this.scrollContainer = this.scrollFrame.nativeElement;
     this.currUserMessages = userId;
@@ -148,41 +126,38 @@ export class InboxComponent implements OnInit {
         if(this.prevMessagesCount == null){
           this.messages = res;
           this.prevMessagesCount = this.messages.length;
-        }else if(this.prevMessagesCount < this.messages.length){
+           }else if(this.prevMessagesCount < this.messages.length){
           this.messages = res;
           this.prevMessagesCount = this.messages.length;
-        }
+           }
       },
       err => {
         if (err.status == 400){
          this.toastr.error(err.error.message, 'Sending Failed');
-         console.log(err.error.message);
         }
         else{
         this.toastr.error('Error while sending messages.', 'Sending Failed');
-        console.log(err);
         }
       }     
     );
     
   }
   getUserMessages(userId:String){
-    console.log("Get User Messages...");
     this.scrollContainer = this.scrollFrame.nativeElement;
     this.currUserMessages = userId;
     var result = this._inboxService.getallMessagesforuser(this.currDiv+'|'+userId+'|'+this.currentUser.ID+'|'+localStorage.getItem('offSet'));
     result.subscribe(
       (res: any) => {        
           this.messages = res;
+         
+          
       },
       err => {
         if (err.status == 400){
          this.toastr.error(err.error.message, 'Sending Failed');
-         console.log(err.error.message);
         }
         else{
         this.toastr.error('Error while sending messages.', 'Sending Failed');
-        console.log(err);
         }
       }     
     );

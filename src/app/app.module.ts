@@ -36,7 +36,15 @@ import { FaqComponent } from './faq/faq.component';
 import { HowitworksComponent } from './howitworks/howitworks.component';
 import { TermsofuseComponent } from './termsofuse/termsofuse.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { NgxSocialShareModule } from 'ngx-social-share';
 import { NumberDirective } from './numbers-only.directive';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +73,7 @@ import { NumberDirective } from './numbers-only.directive';
     NumberDirective
   ],
   imports: [
+    NgxSocialShareModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -77,17 +86,32 @@ import { NumberDirective } from './numbers-only.directive';
      }),
     FormsModule,
     NgbModule,
+    SocialLoginModule,
     CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot()
   ],
-  providers: [UserService, {
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [          
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1168890473484192'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+    ,UserService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
   },
   DatePipe,
 RefreshHeaderService,
-ScriptService],
+ScriptService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

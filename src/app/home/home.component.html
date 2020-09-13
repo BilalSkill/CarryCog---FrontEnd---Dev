@@ -12,33 +12,6 @@
                     <!--Desktop Seach Area Starts Here -->
                     <div class="theme-search-area _mob-h theme-search-area-stacked">
                         <div class="theme-search-area-header _mb-30 _ta-c _c-w">
-
-
-                             <!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml:true,
-      version:'v7.0'
-    });
-  };
-
-  (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<!-- Your Chat Plugin code -->
-<div class="fb-customerchat"
-  attribution=setup_tool page_id="111198023799375">
-</div>
-<!-- Chat Ends here -->
-
-
                             <h1 class="theme-search-area-title theme-search-area-title-sm">CarryCog</h1>
                             <p class="theme-search-area-subtitle"><strong>Community Based Logistics System</strong></p><br>
                             
@@ -304,9 +277,9 @@
                                                     padding-top: 3px;" id="bt" class="btn btn btn-primary-inverse theme-search-results-item-price-btn">&nbsp;&nbsp;&nbsp;<img src="../../assets/img/shareit.png" width="15px" height="15px"/> {{buttonName}}&nbsp;&nbsp;</button>
                                                 </p>
                                                       <!-- Add To Any Button Goes here -->
-                                                   <ng-container *ngIf="showShareIt">
+                                                   <ng-container *ngIf="showShareIt">                                                    
                                                     <div>
-                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;title=FacebookSharing" target="_blank">
+                                                        <a class="btn theme-search-results-item-price-btn" style="width:40px" href="https://www.addtoany.com/add_to/facebook?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
                                                             <img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:#0166ff"></a>
                                                         <a  class="btn theme-search-results-item-price-btn" style="width:40px" href ="https://www.addtoany.com/add_to/whatsapp?linkurl=https://www.carrycog.com/postdetails/{{post.PostsID}}&amp;linkname=" target="_blank">
                                                             <img src="https://static.addtoany.com/buttons/whatsapp.svg" width="32" height="32" style="background-color:#12af0a"></a>        
@@ -348,6 +321,8 @@
                                                             </a>
                                                         </ng-template>
                                                         <ng-template #NewRequest>
+                                                            <!-- <input type="number" min="1" max="{post.SpaceAvailable}" style="width:60px;" [(ngModel)]="KGorCostValue">
+                                                            <br> -->
                                                             <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn"
                                                                 (click)="onRequest(post.PostsID)">
 

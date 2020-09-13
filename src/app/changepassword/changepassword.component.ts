@@ -39,7 +39,6 @@ export class ChangepasswordComponent implements OnInit {
           this.toastr.success('Password has been updated successfully.', 'Password Updated');
           this.router.navigateByUrl("/Home");
         } else {
-          console.log(res.errors);
           this.toastr.error(res.errors, 'Error');
         }
       },

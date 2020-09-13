@@ -19,7 +19,6 @@ export class AppComponent {
   } 
    public loadScript() {        
     var isFound = false;
-    console.log('inside load script function');
     var scripts = document.getElementsByTagName("script")
     for (var i = 0; i < scripts.length; ++i) {
         if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {

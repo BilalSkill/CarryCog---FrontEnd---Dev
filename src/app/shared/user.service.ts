@@ -83,8 +83,6 @@ export class UserService {
     return this.http.post(this.BaseURI+'/users/verifyemail', body);    
   }
   getUserID(){
-    console.log(this.userObject);
-    console.log(this.userObject.Id);
     return this.userObject.Id;
   }
   changePassword() {
@@ -109,5 +107,13 @@ export class UserService {
   login(formData) {
     return this.http.post(this.BaseURI + '/users/authenticate', formData);
   }
-  
+  loginSocialUsers(User){
+    var body = {
+      FirstName: User.firstName,
+      LastName:User.lastName,
+      Email:User.email
+      
+    };
+    return this.http.post(this.BaseURI + '/SocialLogin/authenticate', body);
+  }
 }

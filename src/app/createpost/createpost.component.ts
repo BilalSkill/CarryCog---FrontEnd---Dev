@@ -66,12 +66,10 @@ export class CreatepostComponent implements OnInit {
          if (res.succeeded) {
            this.Currencies = res.data;
         } else {
-          console.log(res.errors);
           this.toastr.error(res.errors, 'Error');
         }
       },
       err => {       
-        console.log(err.error);
         this.toastr.error(err.error.errors, 'Error');
       }
     );
@@ -87,15 +85,12 @@ export class CreatepostComponent implements OnInit {
       case "Traveller": { 
         if(TravelDate == ''){
           this.displayTravelError = true;
-          console.log("Chacking For TravelDate Validations.");
           return false;
         }
         else if(Cost == ''){
-          console.log("Chacking For Cost Validations.");
           return false;
         }
         else if(SpaceAvailable == ''){
-          console.log("Chacking For SpaceAvailable Validations.");
           return false;
         }else{
           return true;
@@ -104,7 +99,6 @@ export class CreatepostComponent implements OnInit {
       }
       case "Requester": { 
         if(SpaceAvailable == ''){
-          console.log("Chacking For SpaceAvailable Validations.");
           return false;
         }
         else{
@@ -193,7 +187,6 @@ if(this.toCity != ''){
   onSubmit() {
     if(this.isFormValid){
     this.submitted = true;
-    console.log(this.formType);
     var result =this._homeService.createPost(this.fromCity,this.toCity);
     result.subscribe(
       (res: any) => {
@@ -234,18 +227,10 @@ if(this.toCity != ''){
      //const SpaceAvailable = this._homeService.CreatePostModel.get('SpaceAvailable');
     switch(this.formType) {  
       case "Traveller": { 
-        // TravelDate.setValidators(Validators.required);
-        // Cost.setValidators(Validators.required);
-        // SpaceAvailable.setValidators(Validators.required);
-        // console.log("Validators Updated.");
          break;
       }
       case "Requester": { 
-        
-        // TravelDate.setValidators(null);
          Cost.setValidators(null);
-        // SpaceAvailable.setValidators(Validators.required);
-        // console.log("Validation Removed.");
          break;
       }      
    }
@@ -260,7 +245,6 @@ if(this.toCity != ''){
   //         this.toastr.success('Post has been created and waiting for Admins approval.', 'Waiting For Approvals');
   //         this.router.navigateByUrl("/Home");
   //       } else {
-  //         console.log(res.errors);
   //         this.toastr.error(res.errors, 'Error');
   //       }
   //     },

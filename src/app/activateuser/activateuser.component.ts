@@ -15,7 +15,6 @@ export class ActivateuserComponent implements OnInit {
   Email;
   ngOnInit(): void {
     this.Email = this.route.snapshot.paramMap.get('Email');
-    console.log(this.Email);
     var result =this._userService.activateUser(this.Email);
     result.subscribe(
       (res: any) => {
@@ -24,7 +23,6 @@ export class ActivateuserComponent implements OnInit {
           
           this.router.navigateByUrl("/Home");
         } else {
-          console.log(res.errors);
           this.toastr.error(res.errors, 'Error');
         }
       },

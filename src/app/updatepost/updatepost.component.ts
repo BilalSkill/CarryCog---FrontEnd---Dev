@@ -31,8 +31,7 @@ export class UpdatepostComponent implements OnInit {
   });
   this.today = new Date();
     this.minDate = new Date(this.today.getFullYear(), this.today.getMonth(), 2);
-    console.log(this._homeService.EditPostModel.value.CountryCode)
-  }
+     }
   
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
@@ -52,8 +51,7 @@ export class UpdatepostComponent implements OnInit {
     }
   }
   ngAfterContentInit(): void{
-    console.log("In Update post component: "+this._homeService.CurrencyValueFromPost);
-    
+   
   }
   public loadScript() {        
     var isFound = false;

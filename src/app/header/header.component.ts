@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem('offSet',res.time_zone.offset);
       },
       err => {
-          console.log(err.message);
       }
     );
   }
@@ -53,7 +52,6 @@ export class HeaderComponent implements OnInit {
   }
   RefreshNavBar(){
     this.userName = localStorage.getItem('userName');
-    console.log(this.userName);
     if (localStorage.getItem('token') != null)
     this.token = true;
     else

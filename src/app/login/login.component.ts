@@ -5,6 +5,14 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RefreshHeaderService } from '../shared/refresh-header.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { SocialAuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
+
 
 @Component({
   selector: 'app-login',
@@ -18,8 +26,8 @@ export class LoginComponent implements OnInit {
   }
   loadAPI: Promise<any>;
   title = 'CarryCog - Login';
-
-  constructor(private titleService: Title, private metaService: Meta,public service: UserService, private _headerService:RefreshHeaderService, private router: Router,private toaster:ToastrService) { 
+  user: SocialUser;
+  constructor(private authService: SocialAuthService,private titleService: Title, private metaService: Meta,public service: UserService, private _headerService:RefreshHeaderService, private router: Router,private toaster:ToastrService) { 
   
   }
 
@@ -36,14 +44,47 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/Home');
   }
  
-
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe(      
+      (res: any) => {
+      this.user = res;
+      if(this.user != null){
+      this.service.loginSocialUsers(this.user).subscribe(
+        (res: any) => {
+           localStorage.setItem('userName',res.FirstName+' '+res.LastName);
+           localStorage.setItem('userID',res.Id);
+           localStorage.setItem('token', res.Token);
+           this._headerService.onRefreshHeader();
+           this.router.navigateByUrl('/Home');
+         },
+         err => {
+           if (err.status == 400){
+            this.toaster.error(err.error.message, 'Activation failed.');
+            console.log(err.error.message);
+           }
+           else{
+           this.toaster.error('Incorrect username or password.', 'Authentication failed.');
+           console.log(err);
+           }
+         }     
+       );
+      }
+    else{
+      //this.toaster.error('Facebook session failed.', 'Facebook Session failed.');
+    }},
+    err => {
+      console.log(err);
+     // this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
+    );
+  }
   onSubmit(form: NgForm) {
     this.service.login(form.value).subscribe(
      (res: any) => {
         localStorage.setItem('userName',res.FirstName+' '+res.LastName);
         localStorage.setItem('userID',res.Id);
         localStorage.setItem('token', res.Token);
-        console.log(this.service.userObject);
         this._headerService.onRefreshHeader();
         this.router.navigateByUrl('/Home');
       },

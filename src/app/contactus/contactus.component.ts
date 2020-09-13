@@ -29,12 +29,10 @@ export class ContactusComponent implements OnInit {
            this.toastr.success('Thank you for contacting CarryCog team, we have received  your message.','Message Received')
            this._contactService.InsertContactUsRecord.reset();
         } else {
-          console.log(res.errors);
           this.toastr.error(res.errors, 'Error');
         }
       },
       err => {       
-        console.log(err.error);
         this.toastr.error(err.error.errors, 'Error');
       }
     );

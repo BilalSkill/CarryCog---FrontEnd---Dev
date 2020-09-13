@@ -222,6 +222,38 @@ img {
 	
 }
 
+.msg_history_Mobile{
+	height: auto;
+	overflow-y: auto;
+	width: 185%;
+}
+
+.type_msg_Mobile {
+	border-top: 1px solid #c4c4c4;
+	position: relative;
+	width: 185%;
+}
 .message {
 	list-style-type: none;
 }
+
+@media (max-width: 992px) {
+	._mob-h {
+	  display: none !important;
+	}
+  }
+  @media (max-width: 992px) {
+	._mob-s {
+	  display: block !important;
+	}
+  }
+  @media (min-width: 992px) {
+	._desk-h {
+	  display: none !important;
+	}
+  }
+  @media (min-width: 992px) {
+	._desk-s {
+	  display: block !important;
+	}
+  }

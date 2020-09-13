@@ -21,7 +21,6 @@ export class ContactUsService {
 
 
   insertRecordContactUs(){   
-    console.log(this.InsertContactUsRecord.value);
     var body={
       Name: this.InsertContactUsRecord.value.Name,
       Email: this.InsertContactUsRecord.value.Email,

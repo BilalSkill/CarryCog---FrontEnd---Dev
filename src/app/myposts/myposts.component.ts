@@ -73,9 +73,7 @@ title = 'CarryCog - My Posts';
     this._homeService.updatePostForUser(postID).subscribe(
       (res: any) => {
          if (res.succeeded == 'True') {
-           console.log(res.data[0]);
-          this._homeService.CurrencyValueFromPost = res.data[0].CountryCode;
-          console.log("In My Posts component: "+this._homeService.CurrencyValueFromPost);
+           this._homeService.CurrencyValueFromPost = res.data[0].CountryCode;
           this._homeService.EditPostModel.patchValue(res.data[0]);
         } else {
           console.log(res.errors);

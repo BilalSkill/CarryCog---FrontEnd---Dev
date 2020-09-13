@@ -21,7 +21,7 @@
             <div *ngIf="token; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
                 <li class="active">
-                    <a routerLink="/Home" style="margin: 0 15px;" (click)="isCollapsed = false">HOME</a>
+                    <a routerLink="/Home" style="margin: 0 15px;" (click)="isCollapsed = true">HOME</a>
                 </li>
                 <li>
                     <a routerLink='/about' style="margin: 0 15px;" (click)="isCollapsed = true">ABOUT US</a>
